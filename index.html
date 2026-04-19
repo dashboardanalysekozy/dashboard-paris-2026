@@ -3,583 +3,600 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dashboard KPI — Paris 2026</title>
+<title>Dashboard KPI — Kozy Paris 2026</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Helvetica Neue',sans-serif;background:#f2f2f7;color:#1c1c1e;font-size:14px;-webkit-font-smoothing:antialiased}
-.hdr{background:#fff;padding:20px 18px 16px;border-bottom:0.5px solid rgba(0,0,0,0.1)}
-.htag{font-size:11px;color:#8e8e93;letter-spacing:0.04em;margin-bottom:4px}
-.htitle{font-size:26px;font-weight:600;color:#1c1c1e;letter-spacing:-0.5px}
-.htitle span{color:#007aff}
-.hmeta{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}
-.hpill{font-size:11px;background:#f2f2f7;color:#8e8e93;padding:3px 10px;border-radius:20px}
-.hpill.blue{background:#e8f3ff;color:#007aff}
-.vtabs{display:flex;background:#fff;border-bottom:0.5px solid rgba(0,0,0,0.1);overflow-x:auto;-webkit-overflow-scrolling:touch}
-.vtab{flex:1;min-width:65px;padding:10px 4px;font-size:10px;color:#8e8e93;cursor:pointer;border-bottom:2px solid transparent;text-align:center;line-height:1.4;transition:all .2s;white-space:nowrap}
-.vtab.on{color:#007aff;border-bottom-color:#007aff}
-.mtabs{display:flex;background:#f2f2f7;padding:8px 12px;gap:6px;overflow-x:auto;-webkit-overflow-scrolling:touch}
-.mtab{font-size:11px;color:#8e8e93;padding:5px 12px;border-radius:20px;cursor:pointer;white-space:nowrap;background:#fff;border:0.5px solid rgba(0,0,0,0.08)}
-.mtab.on{background:#007aff;color:#fff;border-color:#007aff}
-.mtab.dim{opacity:.4;pointer-events:none}
-.main{padding:16px;max-width:900px;margin:0 auto}
-.view{display:none}.view.on{display:block}
-.sec{font-size:12px;font-weight:600;color:#8e8e93;letter-spacing:0.04em;text-transform:uppercase;margin:20px 0 6px}
-.sec:first-child{margin-top:0}
-.sec-explain{background:#fff;border-radius:12px;padding:12px 14px;margin-bottom:10px;border-left:3px solid #007aff}
-.sec-explain p{font-size:12px;color:#3c3c43;line-height:1.6;margin:0}
-.sec-explain strong{color:#1c1c1e}
-.kg{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
-.kc{background:#fff;border-radius:14px;padding:14px;position:relative}
-.kico{width:28px;height:28px;border-radius:8px;margin-bottom:8px}
-.kico.up{background:#30d158}.kico.dn{background:#ff3b30}.kico.wn{background:#ff9f0a}.kico.bl{background:#007aff}.kico.gd{background:#ffd60a}.kico.nt{background:#e5e5ea}
-.kl{font-size:11px;color:#8e8e93;margin-bottom:4px;line-height:1.3}
-.kv{font-size:22px;font-weight:600;color:#1c1c1e;letter-spacing:-0.5px;line-height:1}
-.ks{font-size:11px;margin-top:3px}
-.ks.up{color:#30d158}.ks.dn{color:#ff3b30}.ks.wn{color:#ff9f0a}.ks.bl{color:#007aff}.ks.nt{color:#8e8e93}
-.kcomment{font-size:10px;color:#8e8e93;margin-top:6px;line-height:1.4;border-top:0.5px solid rgba(0,0,0,0.06);padding-top:6px}
-.ksrc{font-size:9px;color:#c7c7cc;margin-top:4px}
-.al{border-radius:14px;padding:12px 14px;display:flex;gap:10px;align-items:flex-start;margin-bottom:10px}
-.al.ok{background:#e8faf0}.al.danger{background:#fff2f2}.al.warning{background:#fff8ec}.al.info{background:#e8f3ff}
-.adot{width:8px;height:8px;border-radius:50%;flex-shrink:0;margin-top:3px}
-.al.ok .adot{background:#30d158}.al.danger .adot{background:#ff3b30}.al.warning .adot{background:#ff9f0a}.al.info .adot{background:#007aff}
-.atit{font-size:12px;font-weight:600;margin-bottom:3px}
-.al.ok .atit{color:#1a7a3c}.al.danger .atit{color:#cc2200}.al.warning .atit{color:#a05a00}.al.info .atit{color:#005bb5}
-.abod{font-size:11px;line-height:1.6}
-.al.ok .abod{color:#2d6a4a}.al.danger .abod{color:#7f1d1d}.al.warning .abod{color:#78450a}.al.info .abod{color:#1e40af}
-.actions{background:#fff;border-radius:14px;padding:14px;margin-bottom:10px}
-.actions-title{font-size:12px;font-weight:600;color:#1c1c1e;margin-bottom:10px}
-.action-item{display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-bottom:0.5px solid rgba(0,0,0,0.06)}
-.action-item:last-child{border-bottom:none;padding-bottom:0}
-.action-dot{width:6px;height:6px;border-radius:50%;background:#007aff;flex-shrink:0;margin-top:4px}
-.action-text{font-size:11px;color:#3c3c43;line-height:1.5}
-.action-text strong{color:#1c1c1e;display:block;margin-bottom:1px}
-.tr-w{display:flex;flex-direction:column;gap:6px;margin-bottom:10px}
-.tr{background:#fff;border-radius:12px;padding:10px 14px}
-.tr-top{display:flex;align-items:center;gap:10px}
-.trm{font-size:10px;color:#8e8e93;min-width:42px;font-weight:500}
-.trl{flex:1;font-size:11px;color:#3c3c43;font-weight:500}
-.trv{font-size:12px;font-weight:600;text-align:right}
-.trv.up{color:#30d158}.trv.dn{color:#ff3b30}.trv.wn{color:#ff9f0a}.trv.nt{color:#8e8e93}
-.tr-comment{font-size:10px;color:#8e8e93;margin-top:5px;padding-top:5px;border-top:0.5px solid rgba(0,0,0,0.06);line-height:1.5}
-.tw{background:#fff;border-radius:14px;overflow:hidden;margin-bottom:12px}
-table{width:100%;border-collapse:collapse;font-size:11px}
-thead th{background:#f9f9f9;font-size:10px;font-weight:600;color:#8e8e93;padding:10px 12px;text-align:left;border-bottom:0.5px solid rgba(0,0,0,0.08);white-space:nowrap}
-tbody td{padding:10px 12px;border-bottom:0.5px solid rgba(0,0,0,0.05);color:#3c3c43;vertical-align:top}
-tbody tr:last-child td{border-bottom:none}
-.ti{font-weight:600;color:#1c1c1e;font-size:12px}
-.b{display:inline-flex;align-items:center;padding:3px 8px;border-radius:20px;font-size:10px;font-weight:500;white-space:nowrap}
-.b.up{background:#e8faf0;color:#1a7a3c}.b.dn{background:#fff2f2;color:#cc2200}.b.wn{background:#fff8ec;color:#a05a00}.b.bl{background:#e8f3ff;color:#005bb5}.b.nt{background:#f2f2f7;color:#8e8e93}
-.dim{opacity:.4}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-font-smoothing:antialiased}
+:root{
+  --bg:#f5f5f0;--card:#ffffff;--card2:#fafaf8;
+  --bd:rgba(0,0,0,0.09);--bd2:rgba(0,0,0,0.05);
+  --tx:#111;--tx2:#555;--tx3:#999;
+  --up:#1a7a3c;--upb:#e8f5ed;--upd:#30c060;
+  --dn:#c0200a;--dnb:#fdf0ee;--dnd:#e84040;
+  --wn:#9a5a00;--wnb:#fdf5e0;--wnd:#f0a000;
+  --bl:#1a4faa;--blb:#edf2fd;--bld:#4080f0;
+  --r:8px;--r2:12px;
+}
+body{font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;background:var(--bg);color:var(--tx);font-size:13px;line-height:1.5}
 
-/* Score composite */
-.score-hero{background:#fff;border-radius:18px;padding:24px;margin-bottom:12px;text-align:center}
-.score-month{font-size:12px;color:#8e8e93;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;margin-bottom:8px}
-.score-circle{width:120px;height:120px;border-radius:50%;margin:0 auto 16px;display:flex;flex-direction:column;align-items:center;justify-content:center;border:6px solid}
-.score-circle.s-great{border-color:#30d158;background:#e8faf0}
-.score-circle.s-good{border-color:#30d158;background:#e8faf0}
-.score-circle.s-ok{border-color:#ff9f0a;background:#fff8ec}
-.score-circle.s-bad{border-color:#ff3b30;background:#fff2f2}
-.score-circle.s-na{border-color:#e5e5ea;background:#f9f9f9}
-.score-num{font-size:32px;font-weight:700;line-height:1}
-.score-circle.s-great .score-num{color:#1a7a3c}
-.score-circle.s-good .score-num{color:#1a7a3c}
-.score-circle.s-ok .score-num{color:#a05a00}
-.score-circle.s-bad .score-num{color:#cc2200}
-.score-circle.s-na .score-num{color:#8e8e93}
-.score-label{font-size:10px;font-weight:600;margin-top:2px}
-.score-circle.s-great .score-label{color:#1a7a3c}
-.score-circle.s-good .score-label{color:#1a7a3c}
-.score-circle.s-ok .score-label{color:#a05a00}
-.score-circle.s-bad .score-label{color:#cc2200}
-.score-circle.s-na .score-label{color:#8e8e93}
-.score-verdict{font-size:14px;font-weight:600;color:#1c1c1e;margin-bottom:4px}
-.score-sub{font-size:12px;color:#8e8e93}
-.score-bar-wrap{background:#f2f2f7;border-radius:8px;height:10px;overflow:hidden;margin:12px 0 4px}
-.score-bar{height:100%;border-radius:8px;transition:width 0.5s}
-.score-bar.s-great{background:#30d158}
-.score-bar.s-good{background:#30d158}
-.score-bar.s-ok{background:#ff9f0a}
-.score-bar.s-bad{background:#ff3b30}
-.score-bar.s-na{background:#e5e5ea}
-.score-signals{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
-.signal-card{background:#fff;border-radius:12px;padding:12px}
-.signal-name{font-size:10px;color:#8e8e93;margin-bottom:4px}
-.signal-val{font-size:13px;font-weight:600;margin-bottom:2px}
-.signal-val.up{color:#30d158}.signal-val.dn{color:#ff3b30}.signal-val.wn{color:#ff9f0a}.signal-val.nt{color:#8e8e93}
-.signal-contrib{font-size:10px;color:#8e8e93}
-.signal-bar-wrap{background:#f2f2f7;border-radius:4px;height:4px;overflow:hidden;margin-top:6px}
-.signal-bar{height:100%;border-radius:4px}
-.signal-bar.up{background:#30d158}.signal-bar.dn{background:#ff3b30}.signal-bar.wn{background:#ff9f0a}.signal-bar.nt{background:#e5e5ea}
-.score-all{background:#fff;border-radius:14px;overflow:hidden;margin-bottom:12px}
-.score-all-row{display:flex;align-items:center;padding:10px 14px;border-bottom:0.5px solid rgba(0,0,0,0.05)}
-.score-all-row:last-child{border-bottom:none}
-.score-all-m{font-size:12px;font-weight:600;color:#1c1c1e;min-width:90px}
-.score-all-bar-wrap{flex:1;background:#f2f2f7;border-radius:6px;height:8px;overflow:hidden;margin:0 12px}
-.score-all-bar{height:100%;border-radius:6px}
-.score-all-num{font-size:12px;font-weight:600;min-width:40px;text-align:right}
-.ftr{margin-top:24px;padding-top:14px;border-top:0.5px solid rgba(0,0,0,0.08)}
-.fnote{font-size:10px;color:#c7c7cc;text-align:center}
+/* ── Header ── */
+.hdr{background:var(--tx);padding:0 24px}
+.hdr-in{max-width:1280px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;height:52px;flex-wrap:wrap;gap:8px}
+.logo{font-size:15px;font-weight:600;color:#fff;letter-spacing:-.2px}
+.logo em{color:var(--upd);font-style:normal}
+.hdr-pills{display:flex;gap:6px;flex-wrap:wrap}
+.hpill{font-size:10px;padding:3px 10px;border-radius:20px;color:rgba(255,255,255,.6);border:1px solid rgba(255,255,255,.15)}
+.hpill.hi{background:rgba(255,255,255,.12);color:#fff}
+
+/* ── Nav ── */
+.nav{background:var(--card);border-bottom:1px solid var(--bd);overflow-x:auto;-webkit-overflow-scrolling:touch}
+.nav-in{max-width:1280px;margin:0 auto;display:flex}
+.ntab{padding:12px 18px;font-size:11px;font-weight:500;color:var(--tx3);cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:all .15s;letter-spacing:.01em}
+.ntab:hover{color:var(--tx2)}
+.ntab.on{color:var(--tx);border-bottom-color:var(--tx)}
+
+/* ── Month bar ── */
+.mbar{background:var(--card2);border-bottom:1px solid var(--bd);padding:8px 24px;overflow-x:auto}
+.mbar-in{max-width:1280px;margin:0 auto;display:flex;gap:5px}
+.mtab{font-size:10px;font-weight:500;padding:4px 12px;border-radius:20px;cursor:pointer;color:var(--tx3);border:1px solid var(--bd);background:var(--card);white-space:nowrap;transition:all .15s}
+.mtab:hover{color:var(--tx2)}
+.mtab.on{background:var(--tx);color:#fff;border-color:var(--tx)}
+.mtab.dim{opacity:.3;pointer-events:none}
+
+/* ── Layout ── */
+.main{max-width:1280px;margin:0 auto;padding:20px 24px}
+.view{display:none}.view.on{display:block}
+
+/* ── Score hero ── */
+.hero{display:grid;grid-template-columns:1fr auto;gap:0;background:var(--card);border:1px solid var(--bd);border-radius:var(--r2);overflow:hidden;margin-bottom:16px}
+.hero-left{padding:20px 24px}
+.hero-eyebrow{font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--tx3);margin-bottom:6px}
+.hero-month{font-size:30px;font-weight:700;color:var(--tx);letter-spacing:-.5px;line-height:1;margin-bottom:8px}
+.hero-desc{font-size:12px;color:var(--tx2);line-height:1.6;max-width:640px}
+.hero-right{padding:20px 28px;border-left:1px solid var(--bd);display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:160px}
+.hero-score-label{font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--tx3);margin-bottom:8px}
+.hero-score{font-size:52px;font-weight:700;letter-spacing:-2px;line-height:1}
+.hero-score.up{color:var(--up)}.hero-score.wn{color:var(--wn)}.hero-score.dn{color:var(--dn)}.hero-score.nt{color:var(--tx3)}
+.hero-score-sub{font-size:11px;font-weight:500;margin-top:4px;padding:3px 10px;border-radius:4px}
+.hero-score.up~.hero-score-sub{background:var(--upb);color:var(--up)}
+.hero-score.wn~.hero-score-sub{background:var(--wnb);color:var(--wn)}
+.hero-score.dn~.hero-score-sub{background:var(--dnb);color:var(--dn)}
+.hero-score.nt~.hero-score-sub{background:var(--card2);color:var(--tx3)}
+.hero-bar{width:100%;height:4px;background:var(--bd);border-radius:2px;overflow:hidden;margin-top:10px}
+.hero-bar-fill{height:100%;border-radius:2px;transition:width .4s}
+.hero-bar-fill.up{background:var(--upd)}.hero-bar-fill.wn{background:var(--wnd)}.hero-bar-fill.dn{background:var(--dnd)}.hero-bar-fill.nt{background:var(--tx3)}
+
+/* ── Section header ── */
+.sh{display:flex;align-items:center;gap:10px;margin:20px 0 10px}
+.sh:first-child{margin-top:0}
+.sh-label{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--tx3);white-space:nowrap}
+.sh-line{height:1px;flex:1;background:var(--bd)}
+.sh-note{font-size:10px;color:var(--tx3);white-space:nowrap}
+
+/* ── Alert ── */
+.alert{border-radius:var(--r);padding:12px 16px;display:flex;gap:10px;align-items:flex-start;margin-bottom:14px;border:1px solid}
+.alert.ok{background:var(--upb);border-color:rgba(48,192,96,.25)}
+.alert.danger{background:var(--dnb);border-color:rgba(232,64,64,.25)}
+.alert.warning{background:var(--wnb);border-color:rgba(240,160,0,.25)}
+.alert.info{background:var(--blb);border-color:rgba(64,128,240,.25)}
+.adot{width:7px;height:7px;border-radius:50%;flex-shrink:0;margin-top:3px}
+.alert.ok .adot{background:var(--upd)}.alert.danger .adot{background:var(--dnd)}.alert.warning .adot{background:var(--wnd)}.alert.info .adot{background:var(--bld)}
+.atit{font-size:12px;font-weight:600;margin-bottom:2px}
+.alert.ok .atit{color:var(--up)}.alert.danger .atit{color:var(--dn)}.alert.warning .atit{color:var(--wn)}.alert.info .atit{color:var(--bl)}
+.abod{font-size:11px;color:var(--tx2);line-height:1.6}
+
+/* ── Explain ── */
+.explain{background:var(--card);border:1px solid var(--bd);border-left:3px solid var(--bld);border-radius:0 var(--r) var(--r) 0;padding:10px 14px;margin-bottom:14px;font-size:11px;color:var(--tx2);line-height:1.6}
+.explain strong{color:var(--tx)}
+
+/* ── KPI grid (4 cols desktop, 2 mobile) ── */
+.kgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px}
+.kcard{background:var(--card);border:1px solid var(--bd);border-radius:var(--r2);padding:14px;position:relative;border-top:3px solid}
+.kcard.up{border-top-color:var(--upd)}.kcard.dn{border-top-color:var(--dnd)}.kcard.wn{border-top-color:var(--wnd)}.kcard.bl{border-top-color:var(--bld)}.kcard.gd{border-top-color:#f0c000}.kcard.nt{border-top-color:var(--bd)}
+.klabel{font-size:10px;color:var(--tx3);margin-bottom:6px;line-height:1.3;font-weight:500}
+.kval{font-size:24px;font-weight:700;letter-spacing:-.5px;line-height:1;margin-bottom:3px;color:var(--tx)}
+.kevol{font-size:11px;font-weight:500}
+.kevol.up{color:var(--up)}.kevol.dn{color:var(--dn)}.kevol.wn{color:var(--wn)}.kevol.nt{color:var(--tx3)}
+.kcomment{font-size:10px;color:var(--tx3);margin-top:7px;padding-top:7px;border-top:1px solid var(--bd2);line-height:1.4}
+.ksrc{position:absolute;bottom:7px;right:10px;font-size:9px;color:rgba(0,0,0,.2)}
+
+/* ── Financial table ── */
+.ftw{background:var(--card);border:1px solid var(--bd);border-radius:var(--r2);overflow:hidden;margin-bottom:14px}
+.fth{padding:11px 16px;border-bottom:1px solid var(--bd);background:var(--card2);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px}
+.fthtit{font-size:11px;font-weight:600;color:var(--tx)}
+.fthsrc{font-size:10px;color:var(--tx3)}
+.ftable{width:100%;border-collapse:collapse}
+.ftable thead th{font-size:10px;font-weight:600;color:var(--tx3);padding:9px 14px;text-align:left;border-bottom:1px solid var(--bd);background:var(--card2);text-transform:uppercase;letter-spacing:.05em;white-space:nowrap}
+.ftable thead th:not(:first-child):not(:last-child){text-align:right}
+.ftable thead th:last-child{text-align:left;padding-left:20px}
+.ftable tbody td{padding:9px 14px;border-bottom:1px solid var(--bd2);color:var(--tx2);font-size:12px;vertical-align:middle}
+.ftable tbody tr:last-child td{border-bottom:none}
+.ftable tbody tr:hover td{background:var(--card2)}
+.td-ind{font-weight:600;color:var(--tx);font-size:12px}
+.td-val{text-align:right;font-weight:700;font-size:14px;color:var(--tx)}
+.td-evol{text-align:right}
+.td-sig{text-align:right}
+.td-note{font-size:11px;color:var(--tx3);line-height:1.4;padding-left:20px!important}
+.evup{color:var(--up);font-weight:600}.evdn{color:var(--dn);font-weight:600}.evnt{color:var(--tx3)}
+.b{display:inline-flex;align-items:center;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:600;white-space:nowrap}
+.b.up{background:var(--upb);color:var(--up)}.b.dn{background:var(--dnb);color:var(--dn)}.b.wn{background:var(--wnb);color:var(--wn)}.b.bl{background:var(--blb);color:var(--bl)}.b.gd{background:#fdf5e0;color:#9a5a00}.b.nt{background:var(--card2);color:var(--tx3)}
+
+/* ── Action cards ── */
+.acgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px;margin-bottom:14px}
+.accard{background:var(--card);border:1px solid var(--bd);border-radius:var(--r2);padding:14px;border-left:3px solid}
+.accard.urgent{border-left-color:var(--dnd)}.accard.modere{border-left-color:var(--wnd)}.accard.opport{border-left-color:var(--upd)}
+.accat{font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px}
+.accard.urgent .accat{color:var(--dn)}.accard.modere .accat{color:var(--wn)}.accard.opport .accat{color:var(--up)}
+.actit{font-size:12px;font-weight:600;color:var(--tx);margin-bottom:4px}
+.acbod{font-size:11px;color:var(--tx2);line-height:1.5}
+
+/* ── Weekly grid ── */
+.wkgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px}
+.wkcard{background:var(--card);border:1px solid var(--bd);border-radius:var(--r2);overflow:hidden}
+.wkhead{padding:9px 12px;background:var(--card2);border-bottom:1px solid var(--bd);display:flex;justify-content:space-between;align-items:center}
+.wknum{font-size:11px;font-weight:700;color:var(--tx)}
+.wkdates{font-size:9px;color:var(--tx3)}
+.wkbody{padding:11px 12px}
+.wkit{display:flex;gap:6px;align-items:flex-start;margin-bottom:5px}
+.wkdot{width:5px;height:5px;border-radius:50%;flex-shrink:0;margin-top:4px}
+.wkdot.up{background:var(--upd)}.wkdot.dn{background:var(--dnd)}.wkdot.wn{background:var(--wnd)}.wkdot.nt{background:var(--tx3)}
+.wktxt{font-size:10px;color:var(--tx2);line-height:1.4}
+.wksig{margin-top:8px;padding-top:8px;border-top:1px solid var(--bd2);font-size:10px;font-weight:600}
+.wksig.up{color:var(--up)}.wksig.dn{color:var(--dn)}.wksig.wn{color:var(--wn)}.wksig.nt{color:var(--tx3)}
+
+/* ── Score signals ── */
+.siggrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
+.sigcard{background:var(--card);border:1px solid var(--bd);border-radius:var(--r2);padding:13px}
+.signame{font-size:10px;color:var(--tx3);margin-bottom:3px;font-weight:500}
+.sigval{font-size:18px;font-weight:700;margin-bottom:1px}
+.sigval.up{color:var(--up)}.sigval.dn{color:var(--dn)}.sigval.wn{color:var(--wn)}.sigval.nt{color:var(--tx3)}
+.signote{font-size:10px;color:var(--tx3);margin-bottom:7px;line-height:1.3}
+.sigrow{display:flex;justify-content:space-between;font-size:9px;color:var(--tx3);margin-bottom:3px}
+.sigbar{background:var(--bd);border-radius:2px;height:3px;overflow:hidden}
+.sigbarfill{height:100%;border-radius:2px}
+.sigbarfill.up{background:var(--upd)}.sigbarfill.dn{background:var(--dnd)}.sigbarfill.wn{background:var(--wnd)}.sigbarfill.nt{background:var(--tx3)}
+
+/* ── Annual rows ── */
+.annrow{display:grid;grid-template-columns:90px 1fr 44px;align-items:center;padding:8px 16px;border-bottom:1px solid var(--bd2);gap:12px;transition:background .1s}
+.annrow:hover{background:var(--card2)}
+.annrow:last-child{border-bottom:none}
+.annm{font-size:12px;font-weight:500;color:var(--tx)}
+.annbar{background:var(--bd);border-radius:2px;height:6px;overflow:hidden}
+.annbarfill{height:100%;border-radius:2px}
+.annn{font-size:12px;font-weight:700;text-align:right}
+
+/* ── Slack button ── */
+.slack-btn{display:inline-flex;align-items:center;gap:7px;background:var(--tx);color:#fff;border:none;padding:9px 18px;border-radius:var(--r);font-size:11px;font-weight:600;cursor:pointer;margin-bottom:16px;transition:opacity .15s;letter-spacing:.01em}
+.slack-btn:hover{opacity:.85}
+.slack-ok{font-size:10px;color:var(--up);margin-left:6px;display:none;font-weight:600}
+
+/* ── Footer ── */
+.ftr{max-width:1280px;margin:0 auto;padding:16px 24px;border-top:1px solid var(--bd);text-align:center}
+.ftrnote{font-size:10px;color:var(--tx3)}
+
+/* ── Responsive ── */
+@media(max-width:900px){
+  .kgrid{grid-template-columns:1fr 1fr}
+  .siggrid{grid-template-columns:1fr 1fr}
+  .wkgrid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:640px){
+  .hdr-in{height:auto;padding:12px 0}
+  .main{padding:14px}
+  .kgrid{grid-template-columns:1fr 1fr}
+  .hero{grid-template-columns:1fr}
+  .hero-right{border-left:none;border-top:1px solid var(--bd);flex-direction:row;gap:16px;justify-content:flex-start}
+  .hero-bar{width:100px}
+  .wkgrid{grid-template-columns:1fr 1fr}
+  .siggrid{grid-template-columns:1fr}
+  .acgrid{grid-template-columns:1fr}
+  .ftable thead th:nth-child(4),.ftable tbody td:nth-child(4){display:none}
+  .mbar{padding:8px 14px}
+  .main{padding:12px}
+}
+@media(max-width:380px){
+  .kgrid{grid-template-columns:1fr}
+  .wkgrid{grid-template-columns:1fr}
+}
 </style>
 </head>
 <body>
 
 <script>
-var MAJ = "19 avril 2026";
+var MAJ="19 avril 2026";
 
-var KPI = [
-  {m:"Janvier",   to:70.2, toe:"+3.3", ai:19,   nfr:-3.9, net:12,  us:15,  uk:26,  mo:"Normal",   px:"197", adp:3.5,  st:"Consolidé",
-   sig:"Positif",   col:"vert",   note:"Bonne période zones touristiques. Creux résidentiel habituel.",
-   cto:"Le TO dépasse la moyenne historique de janvier. Le marché hôtelier parisien démarre bien l'année.",
-   cai:"Très forte hausse des arrivées internationales, portée par US et UK. Effet post-JO prolongé.",
-   cnfr:"Les Parisiens voyagent plus qu'en 2025. Impact modéré sur la restauration résidentielle.",
-   cpx:"Le prix moyen chambre progresse : signe que la demande est solide.",
-   ri:"Janvier est un bon mois pour les zones touristiques. Les restaurants résidentiels connaissent leur creux habituel post-fêtes. La clientèle internationale compense largement.",
-   actions:["Staffing : maintenir les effectifs zones touristiques, réduire en zones résidentielles","Achats : anticiper menus adaptés clientèle internationale","Opportunité : capter les salons pro (Maison & Objet 21-25 janv.)"]},
+var KPI=[
+  {m:"Janvier",st:"Consolidé",col:"vert",sig:"Positif",
+   to:70.2,toe:"+3,3",ai:19,nfr:-3.9,net:12,us:15,uk:26,mo:"Normal",px:"197",adp:3.5,
+   insee:90,insee_evol:"=",insee_sig:"orange",disney:"Faible",disney_col:"vert",
+   meteo:{t:"4–9°C",pj:6,sol:"Faible",ter:"Neutre"},score:72,
+   ri:"Janvier est un bon mois pour les zones touristiques. Les restaurants résidentiels connaissent leur creux habituel post-fêtes. La clientèle internationale compense largement avec US +15% et UK +26%.",
+   semaines:[
+     {num:"S1",dates:"1–5 janv",items:[{t:"Fin des fêtes · flux touristiques",c:"nt"},{t:"Météo froide · terrasses fermées",c:"nt"}],sig:"nt",sv:"Transition"},
+     {num:"S2",dates:"6–12 janv",items:[{t:"Reprise activité professionnelle",c:"up"},{t:"Maison & Objet approche",c:"up"}],sig:"up",sv:"Reprise"},
+     {num:"S3",dates:"13–19 janv",items:[{t:"Maison & Objet 20-24 janv.",c:"up"},{t:"Flux pro en forte hausse",c:"up"}],sig:"up",sv:"Dynamique"},
+     {num:"S4",dates:"20–31 janv",items:[{t:"Post-salon · retour normal",c:"nt"},{t:"Flux international stable",c:"up"}],sig:"nt",sv:"Stable"},
+   ],
+   actions:[
+     {type:"opport",cat:"Opportunité",title:"Maison & Objet — 20 au 24 janvier",body:"~80 000 visiteurs pro. Cibler les groupes d'affaires. Formules déjeuner rapides et efficaces."},
+     {type:"urgent",cat:"Staffing",title:"Maintenir effectifs zones touristiques",body:"US +15%, UK +26% compensent le creux résidentiel. Renforcer sur les créneaux dîner."},
+     {type:"modere",cat:"Achats",title:"Menus adaptés clientèle internationale",body:"Cartes en anglais, options végétariennes. US et UK exigeants sur ce point."},
+   ]},
 
-  {m:"Février",   to:72.1, toe:"+5.1", ai:-2.2, nfr:null, net:null, us:3,   uk:null, mo:"Normal",   px:"203", adp:1.2,  st:"Consolidé",
-   sig:"Mixte",     col:"bleu",   note:"1ère quinzaine dynamique. Creux dès le 21 fév (vac. Zone C).",
-   cto:"Le TO progresse malgré les départs de fin de mois. L'hôtellerie résiste mieux que la restauration.",
-   cai:"Début du ralentissement aérien. Premier signal de retournement après un janvier exceptionnel.",
-   cnfr:"Les Parisiens partent massivement à partir du 21 fév. Impact direct sur les restaurants de quartier.",
-   cpx:"Le prix moyen continue de progresser — la demande reste soutenue sur la 1ère quinzaine.",
-   ri:"Février se coupe en deux : 1ère quinzaine très dynamique (Saint-Valentin, Chine, VI Nations), puis creux marqué à partir du 21 février. Il faut gérer les deux tempos.",
-   actions:["Semaine du 14 fév : augmenter les capacités, menus spéciaux Saint-Valentin","Semaine du 21 fév : réduire staffing et commandes dès le vendredi 20","Nouvel An chinois (15-23 fév) : adapter offre pour clientèle asiatique"]},
+  {m:"Février",st:"Consolidé",col:"bleu",sig:"Mixte",
+   to:72.1,toe:"+5,1",ai:-2.2,nfr:null,net:null,us:3,uk:null,mo:"Normal",px:"203",adp:1.2,
+   insee:91,insee_evol:"+1",insee_sig:"bleu",disney:"Modéré",disney_col:"bleu",
+   meteo:{t:"5–10°C",pj:7,sol:"Faible",ter:"Fermée"},score:58,
+   ri:"Février se coupe en deux : 1ère quinzaine très dynamique (Saint-Valentin, Nouvel An chinois, VI Nations), puis creux marqué à partir du 21 février avec les départs familles Zone C.",
+   semaines:[
+     {num:"S1",dates:"1–8 fév",items:[{t:"VI Nations · flux supporters",c:"up"},{t:"Anticiper Saint-Valentin",c:"up"}],sig:"up",sv:"Dynamique"},
+     {num:"S2",dates:"9–15 fév",items:[{t:"Saint-Valentin samedi 14",c:"up"},{t:"Nouvel An Chinois 15 fév",c:"up"}],sig:"up",sv:"Très fort"},
+     {num:"S3",dates:"16–22 fév",items:[{t:"Vacances Zone C dès le 21",c:"dn"},{t:"Départs massifs familles",c:"dn"}],sig:"dn",sv:"Creux"},
+     {num:"S4",dates:"23–28 fév",items:[{t:"Parisiens en vacances",c:"dn"},{t:"Touristes compensent partiellement",c:"nt"}],sig:"dn",sv:"Creux"},
+   ],
+   actions:[
+     {type:"urgent",cat:"Action prioritaire",title:"Saint-Valentin samedi 14 — renforcer",body:"WE très porteur. Augmenter les capacités, proposer menus spéciaux. Prévoir 2 services."},
+     {type:"urgent",cat:"Staffing",title:"Réduire dès le vendredi 20 au soir",body:"Les départs Zone C commencent le 21. Réduire commandes et effectifs dès le vendredi soir."},
+     {type:"opport",cat:"Opportunité",title:"Nouvel An Chinois — 15 au 23 fév",body:"Adapter l'offre pour la clientèle asiatique si ta zone est concernée."},
+   ]},
 
-  {m:"Mars",      to:81,   toe:"+2.5", ai:-1.5, nfr:-6.3, net:7.4, us:null, uk:null, mo:"Perturbé", px:"211", adp:0.8,  st:"Consolidé",
-   sig:"Mixte",     col:"orange", note:"Creux début mars. Reprise progressive après le 9 mars.",
-   cto:"Le TO de 81% est excellent en valeur absolue, mais les nuitées françaises pèsent sur les zones résidentielles.",
-   cai:"Le trafic aérien ralentit. La perturbation Moyen-Orient se fait sentir.",
-   cnfr:"−6,3% de nuitées françaises : les Parisiens rentrent progressivement à partir du 9 mars seulement.",
-   cpx:"Le prix chambre à 211€ est le plus élevé du trimestre — la demande internationale compense.",
-   ri:"Mars se joue en deux actes. Acte 1 (1er-9 mars) : creux fort. Acte 2 (9-31 mars) : reprise progressive avec retour des résidents et hausse des étrangers +7,4%.",
-   actions:["1er au 9 mars : effectifs réduits, commandes resserrées","Dès le 10 mars : retour à régime normal, anticiper la reprise","Vigilance Moyen-Orient : prévoir une baisse sur la clientèle haut de gamme"]},
+  {m:"Mars",st:"Consolidé",col:"orange",sig:"Mixte",
+   to:81,toe:"+2,5",ai:-1.5,nfr:-6.3,net:7.4,us:null,uk:null,mo:"Perturbé",px:"211",adp:0.8,
+   insee:89,insee_evol:"-2",insee_sig:"rouge",disney:"Modéré → Fort",disney_col:"orange",
+   meteo:{t:"8–14°C",pj:8,sol:"Modéré",ter:"Limitée"},score:51,
+   ri:"Mars se joue en deux actes. Acte 1 (1–9 mars) : creux fort, Parisiens encore absents. Acte 2 (dès le 9) : reprise progressive avec retour des résidents et hausse des étrangers +7,4%.",
+   semaines:[
+     {num:"S1",dates:"1–9 mars",items:[{t:"Fin vacances Zone C le 9",c:"dn"},{t:"Parisiens encore absents",c:"dn"}],sig:"dn",sv:"Creux"},
+     {num:"S2",dates:"9–15 mars",items:[{t:"Retour progressif Parisiens",c:"up"},{t:"Flux étrangers +7,4%",c:"up"}],sig:"up",sv:"Reprise"},
+     {num:"S3",dates:"16–22 mars",items:[{t:"Reprise normale",c:"up"},{t:"Moyen-Orient perturbé",c:"wn"}],sig:"up",sv:"Modéré"},
+     {num:"S4",dates:"23–31 mars",items:[{t:"Land Reine des Neiges 29 mars",c:"up"},{t:"Afflux familles IDF",c:"up"}],sig:"up",sv:"Dynamique"},
+   ],
+   actions:[
+     {type:"urgent",cat:"Staffing",title:"1er au 9 mars : effectifs réduits",body:"Parisiens encore en vacances. Commandes resserrées. Reprendre à plein régime le 10 mars."},
+     {type:"modere",cat:"Vigilance",title:"Moyen-Orient perturbé",body:"Fermeture espaces aériens Golfe. Perte estimée sur clientèle gastronomique haut de gamme."},
+     {type:"opport",cat:"Opportunité",title:"Land Reine des Neiges — dès le 29 mars",body:"Afflux de familles sur toute l'IDF. Adapter menus enfants et familles."},
+   ]},
 
-  {m:"Avril",     to:null, toe:null,   ai:-5.8, nfr:null, net:null, us:-21, uk:null, mo:"Perturbé", px:null,  adp:null, st:"En cours",
-   sig:"Vigilance", col:"rouge",  note:"Double creux : départs Parisiens dès le 18 + arrivées en baisse.",
-   cto:"Données TO non encore consolidées — disponibles fin mai 2026.",
-   cai:"−5,8% d'arrivées aériennes : signal le plus négatif depuis janvier.",
-   cnfr:"Les Parisiens partent massivement dès le 18 avril (vacances Pâques Zone C).",
-   cpx:"Données de prix non consolidées.",
-   ri:"Avril est le mois le plus difficile du semestre. À partir du 18 avril : Parisiens absents + touristes en baisse + Moyen-Orient perturbé. Triple effet négatif.",
-   actions:["Dès le 18 avril : réduire le staffing de 20 à 30%","Réduire les commandes périssables à partir du 16 avril","Opportunité : Français qui boycottent USA (-29%) restent à Paris","Fermer créneaux peu rentables (déjeuner lundi-mardi)"]},
+  {m:"Avril",st:"En cours",col:"rouge",sig:"Vigilance",
+   to:null,toe:null,ai:-5.8,nfr:null,net:null,us:-21,uk:null,mo:"Perturbé",px:null,adp:null,
+   insee:null,insee_evol:"N/D",insee_sig:"gris",disney:"Très fort",disney_col:"rouge",
+   meteo:{t:"8–17°C",pj:10,sol:"Modéré",ter:"Possible"},score:34,
+   ri:"Avril est le mois le plus difficile du semestre. À partir du 18 : Parisiens absents (80% partent) + arrivées en baisse (−5,8%) + Moyen-Orient perturbé. Triple effet négatif à anticiper.",
+   semaines:[
+     {num:"S1",dates:"1–6 avr",items:[{t:"Début de mois normal",c:"nt"},{t:"Météo printanière",c:"up"}],sig:"nt",sv:"Normal"},
+     {num:"S2",dates:"7–13 avr",items:[{t:"12 avr : anniversaire Disney",c:"up"},{t:"Flux familles IDF",c:"up"}],sig:"up",sv:"Correct"},
+     {num:"S3",dates:"14–20 avr",items:[{t:"Vacances Pâques Zone C dès le 18",c:"dn"},{t:"Départs massifs Parisiens",c:"dn"}],sig:"dn",sv:"Creux fort"},
+     {num:"S4",dates:"21–30 avr",items:[{t:"Parisiens absents",c:"dn"},{t:"Arrivées intl. −5,8%",c:"dn"}],sig:"dn",sv:"Double creux"},
+   ],
+   actions:[
+     {type:"urgent",cat:"Staffing urgent",title:"Réduire de 20 à 30% dès le 18 avril",body:"Pire scénario du semestre. Départs Parisiens + baisse arrivées. Agir avant le 16 avril."},
+     {type:"urgent",cat:"Achats",title:"Réduire commandes dès le 16 avril",body:"Anticiper 2 jours avant pour éviter les pertes. Réduire les quantités de 25 à 35%."},
+     {type:"opport",cat:"Opportunité",title:"Français qui boycottent USA (−29%)",body:"Budget redirigé vers Paris. Adapter l'offre déjeuner et weekend pour les capter."},
+     {type:"modere",cat:"Créneaux",title:"Fermer créneaux peu rentables",body:"Déjeuner lundi-mardi à envisager. Concentrer les efforts sur dîner et weekend."},
+   ]},
 
-  {m:"Mai",       to:null,toe:null,ai:null,nfr:null,net:null,us:null,uk:null,mo:"N/D",px:null,adp:null,st:"À venir",sig:"N/D",col:"gris",note:"",cto:"",cai:"",cnfr:"",cpx:"",ri:"",actions:[]},
-  {m:"Juin",      to:null,toe:null,ai:null,nfr:null,net:null,us:null,uk:null,mo:"N/D",px:null,adp:null,st:"À venir",sig:"N/D",col:"gris",note:"",cto:"",cai:"",cnfr:"",cpx:"",ri:"",actions:[]},
-  {m:"Juillet",   to:null,toe:null,ai:null,nfr:null,net:null,us:null,uk:null,mo:"N/D",px:null,adp:null,st:"À venir",sig:"N/D",col:"gris",note:"",cto:"",cai:"",cnfr:"",cpx:"",ri:"",actions:[]},
-  {m:"Août",      to:null,toe:null,ai:null,nfr:null,net:null,us:null,uk:null,mo:"N/D",px:null,adp:null,st:"À venir",sig:"N/D",col:"gris",note:"",cto:"",cai:"",cnfr:"",cpx:"",ri:"",actions:[]},
-  {m:"Septembre", to:null,toe:null,ai:null,nfr:null,net:null,us:null,uk:null,mo:"N/D",px:null,adp:null,st:"À venir",sig:"N/D",col:"gris",note:"",cto:"",cai:"",cnfr:"",cpx:"",ri:"",actions:[]},
-  {m:"Octobre",   to:null,toe:null,ai:null,nfr:null,net:null,us:null,uk:null,mo:"N/D",px:null,adp:null,st:"À venir",sig:"N/D",col:"gris",note:"",cto:"",cai:"",cnfr:"",cpx:"",ri:"",actions:[]},
-  {m:"Novembre",  to:null,toe:null,ai:null,nfr:null,net:null,us:null,uk:null,mo:"N/D",px:null,adp:null,st:"À venir",sig:"N/D",col:"gris",note:"",cto:"",cai:"",cnfr:"",cpx:"",ri:"",actions:[]},
-  {m:"Décembre",  to:null,toe:null,ai:null,nfr:null,net:null,us:null,uk:null,mo:"N/D",px:null,adp:null,st:"À venir",sig:"N/D",col:"gris",note:"",cto:"",cai:"",cnfr:"",cpx:"",ri:"",actions:[]},
-];
-
-var DISNEY=[
-  {m:"Janvier",   niv:"Faible",        col:"vert",   note:"Mois le plus calme de l'année.",           impact:"Peu de familles Disney. Clientèle internationale indépendante dominante."},
-  {m:"Février",   niv:"Modéré",        col:"bleu",   note:"Hausse dès le 21 fév (vac. Zone C).",     impact:"Flux familles en hausse 2ème quinzaine. Bonne opportunité menus enfants."},
-  {m:"Mars",      niv:"Modéré → Fort", col:"orange", note:"Land Reine des Neiges ouvert le 29 mars.", impact:"Afflux familles dès fin mars. Anticiper un pic zones touristiques IDF."},
-  {m:"Avril",     niv:"Très fort",     col:"rouge",  note:"Pâques = parc saturé.",                    impact:"Fort flux familles mais locaux absents. Restaurants touristiques bénéficient, résidentiels souffrent."},
-  {m:"Mai",       niv:"Très fort",     col:"rouge",  note:"Ascension 14-15 mai = jours record.",      impact:"Pic maximal. Prévoir staffing renforcé les WE de mai."},
-  {m:"Juin",      niv:"Modéré",        col:"bleu",   note:"Retour au calme après les ponts.",         impact:"Clientèle mixte. Bon équilibre touristes/résidents."},
-  {m:"Juillet",   niv:"Fort",          col:"orange", note:"Grandes vacances européennes.",             impact:"Familles européennes nombreuses. Menus adaptés, langues étrangères."},
-  {m:"Août",      niv:"Très fort",     col:"rouge",  note:"Pic estival absolu.",                      impact:"Maximum de flux touristiques. Capacité maximale recommandée."},
-  {m:"Septembre", niv:"Modéré",        col:"bleu",   note:"Vacances espagnoles maintiennent flux.",   impact:"Bonne période de transition. Retour progressif des Parisiens."},
-  {m:"Octobre",   niv:"Fort",          col:"orange", note:"Halloween très populaire.",                impact:"Familles et ados nombreux. Adapter ambiance et offre."},
-  {m:"Novembre",  niv:"Faible → Mod.", col:"bleu",   note:"Déco Noël dès le 7 nov.",                 impact:"Clientèle Noël anticipé. Bonne période pour menus festifs."},
-  {m:"Décembre",  niv:"Fort → T.Fort", col:"rouge",  note:"Noël et Jour de l'An = pics max.",        impact:"Pic touristique maximal. Réservations groupes à anticiper dès septembre."},
-];
-
-var INSEE=[
-  {m:"Janvier",   ind:90, evol:"=",  inf:"0.9", sig:"orange", note:"Stable mais sous la moyenne (100). Ménages prudents sur les dépenses discrétionnaires.",           action:"Offres de fidélité et menus intermédiaires pour capter les clients qui hésitent."},
-  {m:"Février",   ind:91, evol:"+1", inf:"0.9", sig:"bleu",   note:"Légère amélioration. Signal neutre à légèrement positif pour les sorties.",                         action:"Profiter de la dynamique Saint-Valentin pour remonter le ticket moyen."},
-  {m:"Mars",      ind:89, evol:"-2", inf:"1.7", sig:"rouge",  note:"Recul notable lié aux tensions géopolitiques et à l'inflation énergie (+7,3%).",                   action:"Surveiller le CA déjeuner — premier poste réduit en période de pessimisme."},
-  {m:"Avril",     ind:null,evol:"N/D",inf:"N/D",sig:"gris",   note:"Publication le 24 avril 2026.",                                                                      action:"Attendre la publication avant d'ajuster la stratégie prix."},
-  {m:"Mai",       ind:null,evol:"N/D",inf:"N/D",sig:"gris",   note:"À venir.",action:""},
-  {m:"Juin",      ind:null,evol:"N/D",inf:"N/D",sig:"gris",   note:"À venir.",action:""},
-  {m:"Juillet",   ind:null,evol:"N/D",inf:"N/D",sig:"gris",   note:"À venir.",action:""},
-  {m:"Août",      ind:null,evol:"N/D",inf:"N/D",sig:"gris",   note:"À venir.",action:""},
-  {m:"Septembre", ind:87, evol:"=",  inf:"N/D", sig:"orange", note:"Référence sept. 2025 — stable à 87. Capacité d'épargne à un niveau record.",                        action:"Miser sur l'expérience et la valeur perçue plutôt que les prix bas."},
-  {m:"Octobre",   ind:null,evol:"N/D",inf:"N/D",sig:"gris",   note:"À venir.",action:""},
-  {m:"Novembre",  ind:null,evol:"N/D",inf:"N/D",sig:"gris",   note:"À venir.",action:""},
-  {m:"Décembre",  ind:90, evol:"N/D",inf:"N/D", sig:"orange", note:"Référence déc. 2025 — stable à 90. Décembre reste un mois de dépenses malgré le pessimisme.",      action:"Menus de fêtes et formules groupes pour capter les budgets de fin d'année."},
-];
-
-var AGENDA=[
-  {date:"21–25 janv.",   ev:"Maison & Objet",              type:"Salon pro",     imp:"Fort",     note:"~80 000 visiteurs pro. Zones nord Paris dynamiques."},
-  {date:"14 fév.",       ev:"Saint-Valentin (samedi)",     type:"Commercial",    imp:"Fort",     note:"WE porteur. Réservations en hausse partout."},
-  {date:"15–23 fév.",    ev:"Nouvel An Chinois",           type:"Culturel",      imp:"Modéré",   note:"Clientèle asiatique en hausse. Zones touristiques."},
-  {date:"26 fév–8 mars", ev:"Salon de l'Agriculture",     type:"Grand public",  imp:"Fort",     note:"600 000 visiteurs. Familles + provinciaux."},
-  {date:"29 mars",       ev:"Ouverture Land Reine Neiges", type:"Tourisme",      imp:"Très fort",note:"Impact flux familles toute l'année en IDF."},
-  {date:"14–15 mai",     ev:"Ascension (pont 4 jours)",   type:"Férié",         imp:"Très fort",note:"Départs massifs. Double creux restauration."},
-  {date:"Juin",          ev:"Roland Garros",               type:"Sport",         imp:"Fort",     note:"~500 000 spectateurs. 2 semaines. Zones 15e–16e."},
-  {date:"14 juil.",      ev:"Fête Nationale",              type:"Culturel",      imp:"Fort",     note:"Fort flux touristique. Terrasses +++"},
-  {date:"Oct.–nov.",     ev:"Halloween Disneyland",        type:"Tourisme",      imp:"Fort",     note:"Familles IDF + touristes européens."},
-  {date:"7 nov–3 jan.",  ev:"Noël Disneyland + Paris",    type:"Tourisme",      imp:"Très fort",note:"Pic maximal fréquentation touristique."},
-];
-
-var DEPARTS=[
-  {dd:"21/02",df:"09/03",ev:"Vacances hiver Zone C",    int:"Rouge",  sig:"Creux 2 semaines",    act:"Réduire staffing dès le 21 fév",      comment:"~80% des familles parisiennes partent. Impact direct sur restaurants de quartier."},
-  {dd:"18/04",df:"04/05",ev:"Vacances Pâques Zone C",   int:"Rouge",  sig:"Double creux majeur", act:"Adapter achats + staffing dès le 18", comment:"Cumul départs Parisiens + baisse arrivées −5,8%. Le pire scénario du semestre."},
-  {dd:"01/05",df:"01/05",ev:"Fête du Travail",          int:"Orange", sig:"WE 3j · jeudi porteur",act:"Préparer le jeudi 30 avril",         comment:"Le jeudi soir avant le 1er mai est traditionnellement très chargé."},
-  {dd:"08/05",df:"08/05",ev:"Victoire 1945",            int:"Orange", sig:"WE 3j · jeudi porteur",act:"Préparer le jeudi 7 mai",            comment:"Même logique que le 1er mai. Jeudi actif, vendredi calme."},
-  {dd:"14/05",df:"17/05",ev:"Ascension + pont",         int:"Rouge",  sig:"Creux 4 jours",       act:"Réduire staffing sur 4 jours",        comment:"Pont 4 jours = départs massifs. Disneyland au max — Paris résidentiel vide."},
-  {dd:"25/05",df:"25/05",ev:"Pentecôte",                int:"Orange", sig:"WE 3j modéré",        act:"Neutre à légèrement positif",         comment:"Moins de départs qu'à l'Ascension. Impact limité."},
-  {dd:"04/07",df:"31/08",ev:"Grandes vacances",         int:"Rouge",  sig:"Creux estival",       act:"Compenser par flux touristes",        comment:"8 semaines de creux résidentiel. La compensation touristique est clé."},
-  {dd:"14/07",df:"14/07",ev:"Fête Nationale",           int:"Orange", sig:"Fort si animation",   act:"Préparer animations spéciales",       comment:"Le 14 juillet attire des touristes. Restaurants avec terrasse profitent le plus."},
-  {dd:"11/11",df:"11/11",ev:"Armistice",                int:"Orange", sig:"Creux si pont",       act:"Anticiper selon configuration pont",  comment:"Si pont 5 jours : fort creux. Si week-end normal : impact limité."},
+  {m:"Mai",      st:"À venir",col:"gris",sig:"N/D",to:null,toe:null,ai:null,nfr:null,net:null,us:null,uk:null,mo:"N/D",px:null,adp:null,insee:null,insee_evol:"N/D",insee_sig:"gris",disney:"Très fort",disney_col:"rouge",meteo:{t:"13–20°C",pj:9,sol:"Bon",ter:"Active"},score:null,ri:"Données disponibles fin mai 2026.",semaines:[],actions:[]},
+  {m:"Juin",     st:"À venir",col:"gris",sig:"N/D",to:null,toe:null,ai:null,nfr:null,net:null,us:null,uk:null,mo:"N/D",px:null,adp:null,insee:null,insee_evol:"N/D",insee_sig:"gris",disney:"Modéré",disney_col:"bleu",meteo:{t:"16–23°C",pj:7,sol:"Bon",ter:"Active"},score:null,ri:"",semaines:[],actions:[]},
+  {m:"Juillet",  st:"À venir",col:"gris",sig:"N/D",to:null,toe:null,ai:null,nfr:null,net:null,us:null,uk:null,mo:"N/D",px:null,adp:null,insee:null,insee_evol:"N/D",insee_sig:"gris",disney:"Fort",disney_col:"orange",meteo:{t:"19–27°C",pj:5,sol:"Excellent",ter:"Maximale"},score:null,ri:"",semaines:[],actions:[]},
+  {m:"Août",     st:"À venir",col:"gris",sig:"N/D",to:null,toe:null,ai:null,nfr:null,net:null,us:null,uk:null,mo:"N/D",px:null,adp:null,insee:null,insee_evol:"N/D",insee_sig:"gris",disney:"Très fort",disney_col:"rouge",meteo:{t:"19–28°C",pj:5,sol:"Excellent",ter:"Maximale"},score:null,ri:"",semaines:[],actions:[]},
+  {m:"Septembre",st:"À venir",col:"gris",sig:"N/D",to:null,toe:null,ai:null,nfr:null,net:null,us:null,uk:null,mo:"N/D",px:null,adp:null,insee:null,insee_evol:"N/D",insee_sig:"gris",disney:"Modéré",disney_col:"bleu",meteo:{t:"14–22°C",pj:6,sol:"Bon",ter:"Active"},score:null,ri:"",semaines:[],actions:[]},
+  {m:"Octobre",  st:"À venir",col:"gris",sig:"N/D",to:null,toe:null,ai:null,nfr:null,net:null,us:null,uk:null,mo:"N/D",px:null,adp:null,insee:null,insee_evol:"N/D",insee_sig:"gris",disney:"Fort",disney_col:"orange",meteo:{t:"10–17°C",pj:9,sol:"Modéré",ter:"Limitée"},score:null,ri:"",semaines:[],actions:[]},
+  {m:"Novembre", st:"À venir",col:"gris",sig:"N/D",to:null,toe:null,ai:null,nfr:null,net:null,us:null,uk:null,mo:"N/D",px:null,adp:null,insee:null,insee_evol:"N/D",insee_sig:"gris",disney:"Faible",disney_col:"vert",meteo:{t:"6–12°C",pj:10,sol:"Faible",ter:"Fermée"},score:null,ri:"",semaines:[],actions:[]},
+  {m:"Décembre", st:"À venir",col:"gris",sig:"N/D",to:null,toe:null,ai:null,nfr:null,net:null,us:null,uk:null,mo:"N/D",px:null,adp:null,insee:null,insee_evol:"N/D",insee_sig:"gris",disney:"Fort",disney_col:"rouge",meteo:{t:"3–9°C",pj:8,sol:"Faible",ter:"Fermée"},score:null,ri:"",semaines:[],actions:[]},
 ];
 
 var MC=["JANV","FÉV","MARS","AVR","MAI","JUIN","JUIL","AOÛT","SEPT","OCT","NOV","DÉC"];
 var cur=0;
 
-// ── Score composite ──────────────────────────────────────────
-function calcScore(idx){
-  var r=KPI[idx];
-  if(r.st==="À venir") return null;
-  var pts=0, max=0;
-
-  // Arrivées aériennes (25 pts)
-  if(r.ai!==null){
-    max+=25;
-    if(r.ai>=10) pts+=25;
-    else if(r.ai>=0) pts+=18;
-    else if(r.ai>=-3) pts+=10;
-    else pts+=0;
-  }
-
-  // TO hôtelier (20 pts)
-  if(r.to!==null){
-    max+=20;
-    if(r.to>=80) pts+=20;
-    else if(r.to>=70) pts+=15;
-    else if(r.to>=60) pts+=8;
-    else pts+=2;
-  }
-
-  // Nuitées françaises (20 pts) — négatif = Parisiens absents = mauvais
-  if(r.nfr!==null){
-    max+=20;
-    if(r.nfr>=0) pts+=20;
-    else if(r.nfr>=-3) pts+=14;
-    else if(r.nfr>=-6) pts+=8;
-    else pts+=2;
-  }
-
-  // INSEE (15 pts)
-  var ins=INSEE[idx];
-  if(ins&&ins.ind!==null){
-    max+=15;
-    if(ins.ind>=95) pts+=15;
-    else if(ins.ind>=90) pts+=10;
-    else if(ins.ind>=85) pts+=6;
-    else pts+=2;
-  }
-
-  // Disney (10 pts) — fort afflux = bon pour touristes mais pas résidentiels → signal mixte
-  var dis=DISNEY[idx];
-  if(dis){
-    max+=10;
-    var dc=cc(dis.col);
-    if(dc==="up") pts+=10;
-    else if(dc==="bl") pts+=8;
-    else if(dc==="wn") pts+=6;
-    else pts+=3;
-  }
-
-  // Agenda événementiel (10 pts)
-  max+=10;
-  var mois=r.m;
-  var agScore=5; // base neutre
-  AGENDA.forEach(function(a){
-    if(a.date.toLowerCase().indexOf(mois.toLowerCase().slice(0,3))!==-1||
-       a.ev.toLowerCase().indexOf(mois.toLowerCase().slice(0,3))!==-1){
-      if(a.imp==="Très fort") agScore=Math.min(10,agScore+3);
-      else if(a.imp==="Fort") agScore=Math.min(10,agScore+2);
-      else if(a.imp==="Modéré") agScore=Math.min(10,agScore+1);
-    }
-  });
-  pts+=agScore;
-
-  if(max===0) return null;
-  return Math.round((pts/max)*100);
-}
-
-function scoreClass(s){
-  if(s===null) return "s-na";
-  if(s>=70) return "s-great";
-  if(s>=50) return "s-good";
-  if(s>=35) return "s-ok";
-  return "s-bad";
-}
-
-function scoreVerdict(s){
-  if(s===null) return {v:"Données insuffisantes",sub:"Disponible en fin de mois"};
-  if(s>=70) return {v:"Excellent mois prévu",sub:"Tous les signaux sont au vert"};
-  if(s>=50) return {v:"Bon mois prévu",sub:"Signaux majoritairement positifs"};
-  if(s>=35) return {v:"Mois modéré",sub:"Signaux mitigés — rester prudent"};
-  return {v:"Mois difficile",sub:"La majorité des signaux sont négatifs"};
-}
-
-// ── Utilitaires ──────────────────────────────────────────────
-function cc(v){var s=(v||"").toLowerCase();if(s==="vert"||s==="positif"||s==="ok")return"up";if(s==="rouge"||s==="danger")return"dn";if(s==="orange"||s==="warning"||s==="mixte")return"wn";if(s==="bleu"||s==="info")return"bl";return"nt";}
-function nc(v){if(v===null||v===undefined) return "nt"; var n=parseFloat(v);return isNaN(n)?"nt":(n>0?"up":(n<0?"dn":"nt"));}
-function fmt(v,suf){if(v===null||v===undefined) return "N/D"; return (v>0?"+":"")+v+(suf||"");}
-function atype(c){return c==="up"?"ok":c==="dn"?"danger":c==="wn"?"warning":"info";}
+function cc(v){var s=(v||"").toLowerCase();if(s==="vert"||s==="positif"||s==="ok")return"up";if(s==="rouge"||s==="danger")return"dn";if(s==="orange"||s==="mixte"||s==="warning")return"wn";if(s==="bleu"||s==="info")return"bl";return"nt";}
+function nc(v){if(v===null||v===undefined)return"nt";var n=parseFloat(v);return isNaN(n)?"nt":(n>0?"up":(n<0?"dn":"nt"));}
+function fmt(v,s){if(v===null||v===undefined)return"N/D";return(parseFloat(v)>0?"+":"")+v+(s||"");}
 function badge(v,c){return'<span class="b '+(c||"nt")+'">'+v+"</span>";}
-function kcard(label,val,sub,cls,src,comment){return'<div class="kc"><div class="kico '+cls+'"></div><div class="kl">'+label+'</div><div class="kv">'+val+'</div><div class="ks '+cls+'">'+sub+'</div>'+(comment?'<div class="kcomment">'+comment+'</div>':'')+'<div class="ksrc">'+src+'</div></div>';}
-function se(text){return'<div class="sec-explain"><p>'+text+'</p></div>';}
+function scl(s){if(s===null)return"nt";if(s>=70)return"up";if(s>=50)return"up";if(s>=35)return"wn";return"dn";}
+function svl(s){if(s===null)return"Données insuffisantes";if(s>=70)return"Excellent mois prévu";if(s>=50)return"Bon mois prévu";if(s>=35)return"Mois modéré";return"Mois difficile";}
 
 function buildTabs(){
-  var el=document.getElementById("mtabs");el.innerHTML="";var last=0;
+  var el=document.getElementById("mbar-in");el.innerHTML="";var last=0;
   KPI.forEach(function(r,i){
     var dim=r.st==="À venir";
     var d=document.createElement("div");
     d.className="mtab"+(dim?" dim":"");
     d.textContent=MC[i];
-    if(!dim){last=i;(function(idx){d.onclick=function(){cur=idx;refreshTabs();renderMonthly(idx);};})(i);}
+    if(!dim){last=i;(function(idx){d.onclick=function(){cur=idx;refreshTabs();renderAll();};})(i);}
     el.appendChild(d);
   });
   cur=last;refreshTabs();
 }
-
 function refreshTabs(){document.querySelectorAll(".mtab").forEach(function(t,i){t.classList.toggle("on",i===cur);});}
 
-function renderMonthly(idx){
-  var r=KPI[idx]; var cls=cc(r.col); var html="";
-  html+='<div class="sec">Hôtellerie & Trafic — '+r.m+"</div>";
-  html+=se("Le <strong>taux d'occupation hôtelier (TO)</strong> mesure le remplissage des hôtels parisiens. C'est le meilleur proxy du flux touristique. Les <strong>arrivées aériennes</strong> anticipent ce flux 2 à 4 semaines à l'avance.");
-  html+='<div class="kg">';
-  html+=kcard("TO hôtelier Paris",r.to?r.to+" %":"N/D",r.toe?r.toe+" pts vs 2025":"—","up","MKG",r.cto);
-  html+=kcard("Arrivées aériennes intl.",fmt(r.ai," %"),"vs même mois 2025",nc(r.ai),"ForwardKeys",r.cai);
-  html+=kcard("Prix moyen chambre",r.px?r.px+" €":"N/D","par nuit · Paris","gd","MKG",r.cpx);
-  html+=kcard("Trafic CDG+Orly",fmt(r.adp," %"),"vs même mois 2025",nc(r.adp),"ADP","Le trafic aéroport confirme les arrivées aériennes. Un écart peut signaler des voyages domestiques.");
+function sh(label,note){return'<div class="sh"><span class="sh-label">'+label+'</span><div class="sh-line"></div>'+(note?'<span class="sh-note">'+note+"</span>":"")+"</div>";}
+function explain(txt){return'<div class="explain">'+txt+"</div>";}
+
+function renderAll(){renderMonthly();renderWeekly();renderScore();renderEvolution();renderMeteo();renderAgenda();renderDeparts();}
+
+function renderMonthly(){
+  var r=KPI[cur];
+  var cls=cc(r.col);
+  var sc=scl(r.score);
+  var html="";
+
+  // Hero
+  html+='<div class="hero"><div class="hero-left">';
+  html+='<div class="hero-eyebrow">Kozy · Paris 2026 · Briefing mensuel</div>';
+  html+='<div class="hero-month">'+r.m+' <span style="font-size:16px;font-weight:400;color:var(--tx3)">'+r.st+"</span></div>";
+  html+='<div class="hero-desc">'+r.ri+"</div>";
+  html+='</div><div class="hero-right">';
+  html+='<div class="hero-score-label">Score composite</div>';
+  html+='<div class="hero-score '+sc+'">'+(r.score!==null?r.score:"—")+'</div>';
+  html+='<div class="hero-score-sub">'+svl(r.score)+"</div>";
+  html+='<div class="hero-bar"><div class="hero-bar-fill '+sc+'" style="width:'+(r.score||0)+'%"></div></div>';
+  html+="</div></div>";
+
+  // KPI cards 4 colonnes
+  html+=sh("KPI principaux","Sources consolidées");
+  html+='<div class="kgrid">';
+  var kpis=[
+    {l:"TO hôtelier",v:r.to?r.to+"%":"N/D",e:r.toe?r.toe+" pts":"—",cls:r.to?"up":"nt",src:"MKG",c:"Taux de remplissage hôtelier Paris. Moyenne long terme : ~68%."},
+    {l:"Arrivées aériennes",v:fmt(r.ai,"%"),e:fmt(r.ai,"%")+" vs 2025",cls:nc(r.ai),src:"ForwardKeys",c:"Anticipateur J-14 des flux touristiques."},
+    {l:"Nuitées françaises",v:fmt(r.nfr,"%"),e:"vs même mois 2025",cls:nc(r.nfr),src:"Flux Vision",c:"Proxy départs Parisiens. Baisse = résidents absents."},
+    {l:"Nuitées étrangers",v:fmt(r.net,"%"),e:"vs même mois 2025",cls:nc(r.net),src:"Flux Vision",c:"Compensation touristique internationale."},
+    {l:"Signal USA",v:fmt(r.us,"%"),e:"1er marché émetteur",cls:nc(r.us),src:"Paris je t'aime",c:"Impact direct zones premium et gastronomie."},
+    {l:"Signal UK",v:fmt(r.uk,"%"),e:"2ème marché émetteur",cls:nc(r.uk),src:"Paris je t'aime",c:"Clientèle fidèle, forte dépense en restauration."},
+    {l:"Prix moyen chambre",v:r.px?r.px+" €":"N/D",e:"par nuit · Paris",cls:r.px?"gd":"nt",src:"MKG",c:"Indicateur de tension de la demande hôtelière."},
+    {l:"INSEE confiance",v:r.insee?r.insee+"/100":"N/D",e:r.insee_evol!=="N/D"?r.insee_evol+" pts":"À venir",cls:cc(r.insee_sig),src:"INSEE",c:"Moral des ménages. Sous 100 = prudence sur les sorties."},
+  ];
+  kpis.forEach(function(k){
+    html+='<div class="kcard '+k.cls+'"><div class="klabel">'+k.l+'</div><div class="kval">'+k.v+'</div><div class="kevol '+k.cls+'">'+k.e+'</div><div class="kcomment">'+k.c+'</div><div class="ksrc">'+k.src+"</div></div>";
+  });
   html+="</div>";
-  html+='<div class="sec">Nuitées & Marchés</div>';
-  html+=se("Les <strong>nuitées françaises</strong> mesurent la présence des Parisiens à Paris. Les <strong>nuitées étrangères</strong> montrent si les touristes compensent. Les <strong>signaux US et UK</strong> sont clés car ce sont les deux premiers marchés émetteurs de Paris.");
-  html+='<div class="kg">';
-  html+=kcard("Nuitées françaises",fmt(r.nfr," %"),"vs même mois 2025",nc(r.nfr),"Flux Vision Orange",r.cnfr);
-  html+=kcard("Nuitées étrangers",fmt(r.net," %"),"vs même mois 2025",nc(r.net),"Flux Vision Orange","Quand les étrangers compensent la baisse des Français, l'impact est limité sur les restaurants touristiques.");
-  html+=kcard("Signal USA",fmt(r.us," %"),"vs même mois 2025",nc(r.us),"Paris je t'aime","1er marché émetteur. Un recul US impacte surtout la gastronomie et les zones premium.");
-  html+=kcard("Signal UK",fmt(r.uk," %"),"vs même mois 2025",nc(r.uk),"Paris je t'aime","2ème marché. La clientèle britannique est fidèle à Paris et dépense bien en restauration.");
-  html+="</div>";
-  html+='<div class="sec">Ce que ça veut dire pour ton restaurant</div>';
-  if(r.ri){var t=atype(cls);html+='<div class="al '+t+'"><div class="adot"></div><div><div class="atit">Analyse — '+r.m+" · "+r.st+'</div><div class="abod">'+r.ri+"</div></div></div>";}
-  if(r.actions&&r.actions.length>0){
-    html+='<div class="sec">Actions recommandées</div>';
-    html+=se("Traduction opérationnelle des données. Ces actions sont à discuter avec tes managers en réunion mensuelle.");
-    html+='<div class="actions"><div class="actions-title">À faire ce mois-ci</div>';
-    r.actions.forEach(function(a){var p=a.split(":");html+='<div class="action-item"><div class="action-dot"></div><div class="action-text">'+(p.length>1?'<strong>'+p[0]+'</strong>'+p.slice(1).join(":"):"<strong>"+a+"</strong>")+"</div></div>";});
+
+  // Signal alert
+  var at=cls==="up"?"ok":cls==="dn"?"danger":cls==="wn"?"warning":"info";
+  html+=sh("Signal restauration");
+  html+='<div class="alert '+at+'"><div class="adot"></div><div><div class="atit">'+r.sig+" — "+r.m+" "+r.st+'</div><div class="abod">'+r.ri+"</div></div></div>";
+
+  // Financial table complète
+  html+=sh("Tableau complet des indicateurs","Tous les baromètres");
+  html+='<div class="ftw"><div class="fth"><span class="fthtit">Vue complète — Hôtellerie · Marchés · Contexte</span><span class="fthsrc">MKG · ADP · ForwardKeys · Flux Vision · INSEE · Disneyland Paris</span></div>';
+  html+='<table class="ftable"><thead><tr><th>Indicateur</th><th>Valeur</th><th>Évolution</th><th>Signal</th><th style="text-align:left;padding-left:20px">Interprétation</th></tr></thead><tbody>';
+  var rows=[
+    {l:"Trafic CDG+Orly",v:fmt(r.adp,"%"),e:fmt(r.adp,"%"),ec:nc(r.adp),s:nc(r.adp),n:"Passagers aéroports Paris. Confirme les arrivées aériennes."},
+    {l:"Moyen-Orient",v:r.mo,e:"—",ec:r.mo==="Perturbé"?"dn":"up",s:r.mo==="Perturbé"?"dn":"up",n:"Perturbation = perte clientèle haut de gamme Golfe Persique."},
+    {l:"Disney affluence",v:r.disney,e:"—",ec:cc(r.disney_col),s:cc(r.disney_col),n:"Proxy flux familiaux IDF. Fort = familles captables en restauration."},
+    {l:"Météo — Températures",v:r.meteo.t,e:r.meteo.pj+" jours de pluie",ec:r.meteo.pj<=6?"up":r.meteo.pj>=10?"dn":"wn",s:r.meteo.pj<=6?"up":r.meteo.pj>=10?"dn":"wn",n:"Impact direct terrasses. Plus de 8j de pluie = terrasses très limitées."},
+    {l:"Terrasse",v:r.meteo.ter,e:r.meteo.sol,ec:r.meteo.ter==="Maximale"||r.meteo.ter==="Active"?"up":r.meteo.ter==="Limitée"||r.meteo.ter==="Possible"?"wn":"nt",s:r.meteo.ter==="Maximale"||r.meteo.ter==="Active"?"up":r.meteo.ter==="Limitée"||r.meteo.ter==="Possible"?"wn":"nt",n:"Potentiel terrasse selon météo saisonnière."},
+  ];
+  rows.forEach(function(row){
+    html+="<tr><td class='td-ind'>"+row.l+"</td><td class='td-val'>"+row.v+"</td><td class='td-evol'><span class='ev"+row.ec+"'>"+row.e+"</span></td><td class='td-sig'>"+badge(row.s==="up"?"Positif":row.s==="dn"?"Négatif":row.s==="wn"?"Prudence":"N/D",row.s)+"</td><td class='td-note'>"+row.n+"</td></tr>";
+  });
+  html+="</tbody></table></div>";
+
+  // Actions
+  if(r.actions&&r.actions.length){
+    html+=sh("Actions recommandées","À faire ce mois-ci");
+    html+='<div class="acgrid">';
+    r.actions.forEach(function(a){html+='<div class="accard '+a.type+'"><div class="accat">'+a.cat+'</div><div class="actit">'+a.title+"</div><div class=\"acbod\">"+a.body+"</div></div>";});
     html+="</div>";
   }
+
+  html+='<button class="slack-btn" onclick="copySlack()">Copier synthèse Slack <span id="slack-ok" class="slack-ok">Copié !</span></button>';
   document.getElementById("content-monthly").innerHTML=html;
 }
 
-function renderEvolution(){
-  var html='<div class="sec">Comment lire cette section ?</div>';
-  html+=se("L'<strong>évolution mensuelle</strong> permet de repérer les tendances sur l'année. Vert = amélioration vs même mois 2025. Rouge = dégradation. L'objectif est d'anticiper les mois à venir en observant la direction prise depuis janvier.");
-  html+='<div class="sec">Arrivées aériennes — évolution mensuelle vs 2025</div>';
-  var comments={"Janvier":"Très fort début d'année — effet post-JO + marchés US et UK au maximum.","Février":"Premier signal de ralentissement. Le retournement aérien commence.","Mars":"Poursuite du ralentissement. Perturbation Moyen-Orient se fait sentir.","Avril":"Signal le plus négatif du semestre. Double creux attendu."};
-  html+='<div class="tr-w">';
-  KPI.forEach(function(r,i){
-    var dim=r.st==="À venir";
-    html+='<div class="tr'+(dim?" dim":"")+'"><div class="tr-top"><span class="trm">'+MC[i]+'</span><span class="trl">'+r.m+" — "+r.st+'</span><span class="trv '+nc(r.ai)+'">'+(r.ai!==null?fmt(r.ai," %"):"N/D")+"</span></div>";
-    if(comments[r.m])html+='<div class="tr-comment">'+comments[r.m]+"</div>";
+function copySlack(){
+  var r=KPI[cur];
+  var msg="📊 *Dashboard Paris — "+r.m+" 2026*\nScore : "+(r.score||"N/D")+"/100 "+(r.score>=70?"🟢":r.score>=50?"🟡":r.score>=35?"🟠":"🔴")+"\n\n";
+  msg+="Signaux :\n• TO : "+(r.to?r.to+"%":"N/D")+" | Arrivées : "+fmt(r.ai,"%")+" | INSEE : "+(r.insee||"N/D")+"\n• Météo : "+r.meteo.t+" · "+r.meteo.pj+"j pluie · Terrasse : "+r.meteo.ter+"\n\n";
+  if(r.actions&&r.actions.length){msg+="Actions :\n";r.actions.slice(0,2).forEach(function(a){msg+="• "+a.title+"\n";});}
+  msg+="\n_Dashboard → https://dashboardanalysekozy.github.io/dashboard-paris-2026_";
+  navigator.clipboard.writeText(msg).then(function(){var el=document.getElementById("slack-ok");if(el){el.style.display="inline";setTimeout(function(){el.style.display="none";},2000);}});
+}
+
+function renderWeekly(){
+  var r=KPI[cur];
+  var html=explain("Vue <strong>semaine par semaine</strong> du mois sélectionné. Permet d'anticiper staffings et commandes à J-7. Les signaux hebdomadaires combinent calendrier scolaire, événements et flux touristiques.");
+  if(!r.semaines||!r.semaines.length){
+    html+='<div class="alert info"><div class="adot"></div><div><div class="atit">Données hebdomadaires disponibles dès mai 2026</div><div class="abod">La vue hebdomadaire sera intégrée sur les mois à venir avec les nouvelles données.</div></div></div>';
+  } else {
+    html+=sh(r.m+" 2026 — Semaine par semaine");
+    html+='<div class="wkgrid">';
+    r.semaines.forEach(function(s){
+      html+='<div class="wkcard"><div class="wkhead"><span class="wknum">'+s.num+'</span><span class="wkdates">'+s.dates+'</span></div><div class="wkbody">';
+      s.items.forEach(function(it){html+='<div class="wkit"><div class="wkdot '+it.c+'"></div><div class="wktxt">'+it.t+"</div></div>";});
+      html+='<div class="wksig '+s.sig+'">→ '+s.sv+"</div></div></div>";
+    });
     html+="</div>";
+  }
+  document.getElementById("content-weekly").innerHTML=html;
+}
+
+function renderScore(){
+  var r=KPI[cur];
+  var sc=scl(r.score);
+  var html="";
+  html+='<div class="hero"><div class="hero-left"><div class="hero-eyebrow">Score composite — '+r.m+' 2026</div><div class="hero-month">'+svl(r.score)+'</div><div class="hero-desc">6 baromètres pondérés par leur impact réel sur la restauration parisienne. Vert = mois favorable. Rouge = mois difficile à anticiper.</div></div>';
+  html+='<div class="hero-right"><div class="hero-score-label">Score global</div><div class="hero-score '+sc+'">'+(r.score!==null?r.score:"—")+'</div><div class="hero-score-sub">'+svl(r.score)+'</div><div class="hero-bar"><div class="hero-bar-fill '+sc+'" style="width:'+(r.score||0)+'%"></div></div></div></div>';
+
+  html+=sh("Détail des 6 signaux","Poids · Contribution · Signal");
+  var sigs=[
+    {n:"Arrivées aériennes",v:r.ai!==null?fmt(r.ai,"%"):"N/D",c:nc(r.ai),p:25,s:r.ai!==null?(r.ai>=10?25:r.ai>=0?18:r.ai>=-3?10:0):null,note:"ForwardKeys · anticipateur J-14"},
+    {n:"TO hôtelier",v:r.to?r.to+"%":"N/D",c:r.to?"up":"nt",p:20,s:r.to?(r.to>=80?20:r.to>=70?15:r.to>=60?8:2):null,note:"MKG · meilleur proxy flux touristique"},
+    {n:"Nuitées françaises",v:r.nfr!==null?fmt(r.nfr,"%"):"N/D",c:nc(r.nfr),p:20,s:r.nfr!==null?(r.nfr>=0?20:r.nfr>=-3?14:r.nfr>=-6?8:2):null,note:"Flux Vision Orange · proxy départs Parisiens"},
+    {n:"INSEE confiance",v:r.insee?r.insee+"/100":"N/D",c:cc(r.insee_sig),p:15,s:r.insee?(r.insee>=95?15:r.insee>=90?10:r.insee>=85?6:2):null,note:"INSEE · indicateur avancé 30-60 jours"},
+    {n:"Disneyland affluence",v:r.disney,c:cc(r.disney_col),p:10,s:cc(r.disney_col)==="up"?10:cc(r.disney_col)==="bl"?8:cc(r.disney_col)==="wn"?6:3,note:"Proxy flux familiaux IDF"},
+    {n:"Météo & Terrasses",v:r.meteo.t+" · "+r.meteo.pj+"j pluie",c:r.meteo.pj<=5?"up":r.meteo.pj>=10?"dn":"wn",p:10,s:r.meteo.pj<=5?10:r.meteo.pj<=8?7:4,note:"Impact direct CA terrasses"},
+  ];
+  html+='<div class="siggrid">';
+  sigs.forEach(function(s){
+    var pct=s.s!==null?Math.round((s.s/s.p)*100):0;
+    html+='<div class="sigcard"><div class="signame">'+s.n+'</div><div class="sigval '+s.c+'">'+s.v+'</div><div class="signote">'+s.note+'</div><div class="sigrow"><span>Poids : '+s.p+'%</span><span>'+(s.s!==null?s.s+"/"+s.p:"N/D")+'</span></div><div class="sigbar"><div class="sigbarfill '+s.c+'" style="width:'+pct+'%"></div></div></div>';
   });
   html+="</div>";
-  html+='<div class="sec">Tableau comparatif — Vue d\'ensemble</div>';
-  html+=se("Lis ce tableau <strong>colonne par colonne</strong> pour repérer les marchés qui progressent ou reculent, et <strong>ligne par ligne</strong> pour comprendre chaque mois globalement.");
-  html+='<div class="tw"><table><thead><tr><th>Mois</th><th>TO hôtelier</th><th>Arrivées</th><th>Nuitées FR</th><th>Signal US</th><th>Statut</th></tr></thead><tbody>';
+
+  html+=sh("Vue annuelle — Score tous les mois");
+  html+='<div class="ftw">';
   KPI.forEach(function(r){
-    html+="<tr><td class=\"ti\">"+r.m+"</td>";
-    html+="<td>"+badge(r.to?r.to+" %":"N/D",r.to?"up":"nt")+"</td>";
-    html+="<td>"+badge(r.ai!==null?fmt(r.ai," %"):"N/D",nc(r.ai))+"</td>";
-    html+="<td>"+badge(r.nfr!==null?fmt(r.nfr," %"):"N/D",nc(r.nfr))+"</td>";
-    html+="<td>"+badge(r.us!==null?fmt(r.us," %"):"N/D",nc(r.us))+"</td>";
-    html+="<td>"+badge(r.st,"nt")+"</td></tr>";
+    var sc=scl(r.score);
+    var col=sc==="up"?"var(--upd)":sc==="wn"?"var(--wnd)":sc==="dn"?"var(--dnd)":"var(--bd)";
+    html+='<div class="annrow"><div class="annm">'+r.m+'</div><div class="annbar"><div class="annbarfill" style="width:'+(r.score||0)+'%;background:'+col+'"></div></div><div class="annn" style="color:'+col+'">'+(r.score!==null?r.score:"—")+"</div></div>";
+  });
+  html+="</div>";
+  document.getElementById("content-score").innerHTML=html;
+}
+
+function renderEvolution(){
+  var html=explain("Lis ce tableau <strong>colonne par colonne</strong> pour repérer les marchés qui progressent ou reculent, et <strong>ligne par ligne</strong> pour comprendre chaque mois. Vert = amélioration vs même mois 2025. Rouge = dégradation.");
+  html+='<div class="ftw"><div class="fth"><span class="fthtit">Comparatif annuel — Tous indicateurs</span><span class="fthsrc">ForwardKeys · MKG · Flux Vision · INSEE · Score composite</span></div>';
+  html+='<table class="ftable"><thead><tr><th>Mois</th><th>TO hôtelier</th><th>Arrivées intl.</th><th>Nuitées FR</th><th>Signal US</th><th>INSEE</th><th>Score</th><th>Statut</th></tr></thead><tbody>';
+  KPI.forEach(function(r){
+    var sc=scl(r.score);
+    var scol=sc==="up"?"var(--up)":sc==="wn"?"var(--wn)":sc==="dn"?"var(--dn)":"var(--tx3)";
+    html+="<tr><td class='td-ind'>"+r.m+"</td>";
+    html+="<td class='td-sig'>"+badge(r.to?r.to+"%":"N/D",r.to?"up":"nt")+"</td>";
+    html+="<td class='td-sig'>"+badge(r.ai!==null?fmt(r.ai,"%"):"N/D",nc(r.ai))+"</td>";
+    html+="<td class='td-sig'>"+badge(r.nfr!==null?fmt(r.nfr,"%"):"N/D",nc(r.nfr))+"</td>";
+    html+="<td class='td-sig'>"+badge(r.us!==null?fmt(r.us,"%"):"N/D",nc(r.us))+"</td>";
+    html+="<td class='td-sig'>"+badge(r.insee?r.insee:"N/D",cc(r.insee_sig))+"</td>";
+    html+="<td style='text-align:right;font-weight:700;color:"+scol+"'>"+(r.score!==null?r.score:"—")+"</td>";
+    html+="<td class='td-sig'>"+badge(r.st,"nt")+"</td></tr>";
   });
   html+="</tbody></table></div>";
   document.getElementById("content-evolution").innerHTML=html;
 }
 
-function renderDeparts(){
-  var html='<div class="sec">Comment lire cette section ?</div>';
-  html+=se("Les <strong>départs parisiens</strong> sont le facteur n°1 de variation pour les restaurants de quartier. Ce calendrier permet d'<strong>anticiper à J-7</strong> tes commandes et ton staffing. Rouge = creux fort à anticiper.");
-  html+='<div class="sec">Calendrier des départs & événements 2026</div>';
-  html+='<div class="tr-w">';
-  DEPARTS.forEach(function(d){
-    var cls=cc(d.int);
-    html+='<div class="tr"><div class="tr-top"><span class="trm" style="font-size:10px;min-width:60px">'+d.dd+" → "+d.df+'</span><span class="trl">'+d.ev+'</span><span class="trv '+cls+'">'+d.int+"</span></div>";
-    html+='<div class="tr-comment"><strong style="color:#1c1c1e">Action :</strong> '+d.act+" · "+d.comment+"</div>";
-    html+="</div>";
+function renderMeteo(){
+  var html=explain("La <strong>météo est le facteur n°1 non financier</strong> impactant la restauration. Une semaine de pluie peut réduire le CA terrasse de 20 à 35%. Cet onglet donne les normales saisonnières et leur impact estimé par mois.");
+  html+='<div class="ftw"><div class="fth"><span class="fthtit">Météo & Impact terrasse — Paris 2026</span><span class="fthsrc">Normales saisonnières · Météo France</span></div>';
+  html+='<table class="ftable"><thead><tr><th>Mois</th><th>Températures</th><th>Jours pluie</th><th>Ensoleillement</th><th>Terrasse</th><th style="text-align:left;padding-left:20px">Impact CA estimé</th></tr></thead><tbody>';
+  var impacts={"Fermée":"N/A — terrasse fermée","Neutre":"Impact neutre — intérieur dominant","Limitée":"−10 à −15% si pluie fréquente","Possible":"Variable selon les semaines","Active":"Terrasse ouverte · +10 à +20% si soleil","Maximale":"Terrasse plein régime · +20 à +30%"};
+  KPI.forEach(function(r){
+    var m=r.meteo;
+    var pc=m.pj<=5?"up":m.pj<=8?"wn":"dn";
+    html+="<tr><td class='td-ind'>"+r.m+"</td><td class='td-val' style='font-size:12px'>"+m.t+"</td>";
+    html+="<td class='td-sig'>"+badge(m.pj+" jours",pc)+"</td>";
+    html+="<td class='td-sig'>"+badge(m.sol,m.sol==="Excellent"?"up":m.sol==="Bon"?"bl":m.sol==="Modéré"?"wn":"nt")+"</td>";
+    html+="<td class='td-sig'>"+badge(m.ter,m.ter==="Maximale"||m.ter==="Active"?"up":m.ter==="Limitée"||m.ter==="Possible"?"wn":"nt")+"</td>";
+    html+="<td class='td-note'>"+(impacts[m.ter]||"—")+"</td></tr>";
   });
-  html+="</div>";
-  document.getElementById("content-departs").innerHTML=html;
-}
+  html+="</tbody></table></div>";
 
-function renderDisney(){
-  var html='<div class="sec">Pourquoi suivre Disneyland Paris ?</div>';
-  html+=se("Disneyland Paris est le <strong>1er parc européen</strong> avec 16M de visiteurs/an. Son affluence est un proxy des flux familiaux en IDF. <strong>Nouveauté 2026 :</strong> ouverture du Land Reine des Neiges le 29 mars — impact sur toute l'année.");
-  html+='<div class="sec">Baromètre mensuel — Affluence & Impact restauration</div>';
-  html+='<div class="tr-w">';
-  DISNEY.forEach(function(d,i){
-    var cls=cc(d.col);
-    html+='<div class="tr"><div class="tr-top"><span class="trm">'+MC[i]+'</span><span class="trl">'+d.m+" — "+d.note+'</span><span class="trv '+cls+'">'+d.niv+"</span></div>";
-    html+='<div class="tr-comment"><strong style="color:#1c1c1e">Impact resto :</strong> '+d.impact+"</div>";
-    html+="</div>";
-  });
-  html+="</div>";
-  document.getElementById("content-disney").innerHTML=html;
-}
-
-function renderInsee(){
-  var html='<div class="sec">Pourquoi suivre l\'indice INSEE ?</div>';
-  html+=se("L'<strong>indice de confiance des ménages</strong> mesure le moral économique des Français. Moyenne historique = <strong>100</strong>. En dessous = ménages pessimistes → moins de sorties restaurant. C'est un <strong>indicateur avancé à 30-60 jours</strong>. Publié chaque fin de mois.");
-  html+='<div class="sec">Évolution mensuelle — Indice & Inflation</div>';
-  html+='<div class="tr-w">';
-  INSEE.forEach(function(r){
-    var cls=cc(r.sig);
-    html+='<div class="tr'+(r.ind===null?" dim":"")+'"><div class="tr-top"><span class="trm" style="font-size:18px;font-weight:600;color:#1c1c1e;min-width:44px">'+(r.ind!==null?r.ind:"—")+'</span><span class="trl">'+r.m+(r.evol!=="N/D"?" · évol. "+r.evol:"")+(r.inf!=="N/D"?" · inflation "+r.inf+"%":" — à venir")+'</span><span class="trv '+cls+'">'+(r.sig==="gris"?"À venir":r.sig==="rouge"?"Attention":r.sig==="orange"?"Prudence":"Stable")+"</span></div>";
-    if(r.note)html+='<div class="tr-comment">'+r.note+(r.action?'<br><strong style="color:#007aff">→ '+r.action+"</strong>":"")+"</div>";
-    html+="</div>";
-  });
-  html+="</div>";
-  document.getElementById("content-insee").innerHTML=html;
+  html+=sh("Règle d'or terrasse","Impact météo sur le CA");
+  html+='<div class="ftw"><table class="ftable"><thead><tr><th>Condition météo</th><th>Impact terrasse estimé</th><th style="text-align:left;padding-left:20px">Action recommandée</th></tr></thead><tbody>';
+  [["Ensoleillé · +20°C","up","+ 20 à +30% CA","Renforcer le personnel terrasse · anticiper J-3"],
+   ["Nuageux sans pluie","nt","Neutre","Effectifs normaux"],
+   ["Pluie intermittente","wn","− 15 à −20%","Réduire commandes terrasse de 20%"],
+   ["Pluie soutenue","dn","− 25 à −35%","Fermer terrasse · reporter personnel en salle"],
+   ["Canicule (+35°C)","wn","− 10 à −20%","Adapter horaires · terrasse matin uniquement"],
+  ].forEach(function(r){html+="<tr><td class='td-ind'>"+r[0]+"</td><td class='td-sig'>"+badge(r[2],r[1])+"</td><td class='td-note'>"+r[3]+"</td></tr>";});
+  html+="</tbody></table></div>";
+  document.getElementById("content-meteo").innerHTML=html;
 }
 
 function renderAgenda(){
-  var html='<div class="sec">Pourquoi suivre l\'agenda ?</div>';
-  html+=se("Un salon de 80 000 personnes ou un match au Stade de France génère des pics de fréquentation immédiats. <strong>Anticiper = adapter le staffing et les achats à J-7.</strong> Les événements très forts sont à intégrer dans ta stratégie commerciale.");
-  html+='<div class="sec">Agenda événementiel Paris 2026</div>';
-  html+='<div class="tr-w">';
-  AGENDA.forEach(function(a){
-    var cls=a.imp==="Très fort"?"dn":a.imp==="Fort"?"wn":a.imp==="Modéré"?"bl":"nt";
-    html+='<div class="tr"><div class="tr-top"><span class="trm" style="font-size:10px;min-width:65px;white-space:nowrap">'+a.date+'</span><span class="trl"><strong style="color:#1c1c1e;font-size:11px">'+a.ev+'</strong></span><span class="trv '+cls+'">'+a.imp+"</span></div>";
-    html+='<div class="tr-comment">'+badge(a.type,"nt")+" · "+a.note+"</div>";
-    html+="</div>";
+  var agenda=[
+    {date:"21–25 janv.",ev:"Maison & Objet",type:"Salon pro",imp:"Fort",note:"~80 000 visiteurs pro. Zones nord Paris dynamiques."},
+    {date:"14 fév.",ev:"Saint-Valentin (samedi)",type:"Commercial",imp:"Fort",note:"WE porteur. Réservations en hausse partout."},
+    {date:"15–23 fév.",ev:"Nouvel An Chinois",type:"Culturel",imp:"Modéré",note:"Clientèle asiatique en hausse."},
+    {date:"26 fév–8 mars",ev:"Salon de l'Agriculture",type:"Grand public",imp:"Fort",note:"600 000 visiteurs. Familles + provinciaux."},
+    {date:"29 mars",ev:"Ouverture Land Reine des Neiges",type:"Tourisme",imp:"Très fort",note:"Impact flux familles toute l'année IDF."},
+    {date:"12 avr.",ev:"Anniversaire Disneyland Paris",type:"Tourisme",imp:"Fort",note:"Parc saturé. Familles IDF nombreuses."},
+    {date:"18 avr–4 mai",ev:"Vacances Pâques Zone C",type:"Scolaire",imp:"Très fort",note:"Départs massifs Parisiens. Double creux."},
+    {date:"14–15 mai",ev:"Ascension (pont 4 jours)",type:"Férié",imp:"Très fort",note:"Départs massifs. Creux restauration résidentielle."},
+    {date:"Juin",ev:"Roland Garros",type:"Sport",imp:"Fort",note:"~500 000 spectateurs. 2 semaines."},
+    {date:"14 juil.",ev:"Fête Nationale",type:"Culturel",imp:"Fort",note:"Fort flux touristique. Terrasses +++"},
+    {date:"Oct–nov.",ev:"Halloween Disneyland",type:"Tourisme",imp:"Fort",note:"Familles IDF + touristes européens."},
+    {date:"7 nov–3 jan.",ev:"Noël Disneyland + Paris",type:"Tourisme",imp:"Très fort",note:"Pic maximal fréquentation touristique."},
+  ];
+  var html=explain("Un événement de 80 000 personnes à Paris génère un pic immédiat sur certaines zones. <strong>Anticiper à J-7</strong> : adapter staffing et commandes avant chaque événement fort.");
+  html+='<div class="ftw"><div class="fth"><span class="fthtit">Agenda événementiel Paris 2026</span><span class="fthsrc">Paris Convention Bureau · Éducation Nationale · Bison Futé</span></div>';
+  html+='<table class="ftable"><thead><tr><th>Date</th><th>Événement</th><th>Type</th><th>Impact</th><th style="text-align:left;padding-left:20px">Signal restauration</th></tr></thead><tbody>';
+  agenda.forEach(function(a){
+    var ic=a.imp==="Très fort"?"dn":a.imp==="Fort"?"wn":"bl";
+    html+="<tr><td style='white-space:nowrap;font-size:11px;font-weight:500'>"+a.date+"</td><td class='td-ind'>"+a.ev+"</td><td>"+badge(a.type,"nt")+"</td><td class='td-sig'>"+badge(a.imp,ic)+"</td><td class='td-note'>"+a.note+"</td></tr>";
   });
-  html+="</div>";
+  html+="</tbody></table></div>";
   document.getElementById("content-agenda").innerHTML=html;
 }
 
-function renderScore(){
-  var html='<div class="sec">Comment fonctionne ce score ?</div>';
-  html+=se("Le <strong>score composite (0–100)</strong> agrège 6 baromètres pondérés par leur impact réel sur la restauration parisienne : arrivées aériennes (25%), TO hôtelier (20%), nuitées françaises (20%), INSEE (15%), Disneyland (10%), agenda (10%). Plus le score est élevé, plus le mois est favorable.");
-
-  // Score du mois actuel
-  var r=KPI[cur];
-  var s=calcScore(cur);
-  var sc=scoreClass(s);
-  var sv=scoreVerdict(s);
-  var pct=s||0;
-
-  html+='<div class="sec">Score — '+r.m+" "+r.st+"</div>";
-  html+='<div class="score-hero">';
-  html+='<div class="score-month">'+r.m.toUpperCase()+" 2026"+"</div>";
-  html+='<div class="score-circle '+sc+'"><div class="score-num">'+(s!==null?s:"N/D")+'</div><div class="score-label">'+(s!==null?"/100":"")+"</div></div>";
-  html+='<div class="score-verdict">'+sv.v+"</div>";
-  html+='<div class="score-sub">'+sv.sub+"</div>";
-  html+='<div class="score-bar-wrap"><div class="score-bar '+sc+'" style="width:'+pct+'%"></div></div>';
-  html+='<div style="display:flex;justify-content:space-between;font-size:10px;color:#8e8e93"><span>0 — Très difficile</span><span>100 — Excellent</span></div>';
-  html+="</div>";
-
-  // Détail signaux
-  html+='<div class="sec">Détail des signaux</div>';
-  html+='<div class="score-signals">';
-  var ins=INSEE[cur];
-  var dis=DISNEY[cur];
-  var signals=[
-    {name:"Arrivées aériennes",val:r.ai!==null?fmt(r.ai," %"):"N/D",cls:nc(r.ai),poids:25,contrib:r.ai!==null?(r.ai>=10?25:r.ai>=0?18:r.ai>=-3?10:0):null},
-    {name:"TO hôtelier",val:r.to?r.to+" %":"N/D",cls:r.to?"up":"nt",poids:20,contrib:r.to?(r.to>=80?20:r.to>=70?15:r.to>=60?8:2):null},
-    {name:"Nuitées françaises",val:r.nfr!==null?fmt(r.nfr," %"):"N/D",cls:nc(r.nfr),poids:20,contrib:r.nfr!==null?(r.nfr>=0?20:r.nfr>=-3?14:r.nfr>=-6?8:2):null},
-    {name:"INSEE confiance",val:ins&&ins.ind?ins.ind+"/100":"N/D",cls:ins?cc(ins.sig):"nt",poids:15,contrib:ins&&ins.ind?(ins.ind>=95?15:ins.ind>=90?10:ins.ind>=85?6:2):null},
-    {name:"Disneyland affluence",val:dis?dis.niv:"N/D",cls:dis?cc(dis.col):"nt",poids:10,contrib:dis?(cc(dis.col)==="up"?10:cc(dis.col)==="bl"?8:cc(dis.col)==="wn"?6:3):null},
-    {name:"Agenda événementiel",val:"Paris 2026",cls:"bl",poids:10,contrib:7},
+function renderDeparts(){
+  var departs=[
+    {dd:"21/02",df:"09/03",ev:"Vacances hiver Zone C",int:"Rouge",act:"Réduire staffing dès le 21 fév",comment:"~80% des familles parisiennes partent. Impact direct restaurants de quartier."},
+    {dd:"18/04",df:"04/05",ev:"Vacances Pâques Zone C",int:"Rouge",act:"Adapter achats + staffing dès le 18",comment:"Cumul départs Parisiens + baisse arrivées −5,8%. Pire scénario du semestre."},
+    {dd:"01/05",df:"01/05",ev:"Fête du Travail",int:"Orange",act:"Préparer le jeudi 30 avril au soir",comment:"Le jeudi soir avant le 1er mai est traditionnellement très chargé."},
+    {dd:"08/05",df:"08/05",ev:"Victoire 1945",int:"Orange",act:"Préparer le jeudi 7 mai au soir",comment:"Même logique que le 1er mai. Jeudi actif, vendredi calme."},
+    {dd:"14/05",df:"17/05",ev:"Ascension + pont 4j",int:"Rouge",act:"Réduire staffing sur 4 jours",comment:"Pont 4 jours = départs massifs. Paris résidentiel vide."},
+    {dd:"25/05",df:"25/05",ev:"Pentecôte WE 3j",int:"Orange",act:"Neutre à légèrement positif",comment:"Moins de départs qu'à l'Ascension. Impact limité."},
+    {dd:"04/07",df:"31/08",ev:"Grandes vacances",int:"Rouge",act:"Compenser par flux touristes",comment:"8 semaines de creux résidentiel. Compensation touristique clé."},
+    {dd:"14/07",df:"14/07",ev:"Fête Nationale",int:"Orange",act:"Préparer animations spéciales",comment:"Attire des touristes. Restaurants avec terrasse profitent le plus."},
+    {dd:"11/11",df:"11/11",ev:"Armistice",int:"Orange",act:"Anticiper selon configuration pont",comment:"Si pont 5 jours : fort creux. Si week-end normal : impact limité."},
   ];
-  signals.forEach(function(sig){
-    var bpct=sig.contrib!==null?Math.round((sig.contrib/sig.poids)*100):0;
-    html+='<div class="signal-card"><div class="signal-name">'+sig.name+'</div>';
-    html+='<div class="signal-val '+sig.cls+'">'+sig.val+"</div>";
-    html+='<div class="signal-contrib">Poids : '+sig.poids+"% · Contribution : "+(sig.contrib!==null?sig.contrib+"/"+sig.poids:"N/D")+"</div>";
-    html+='<div class="signal-bar-wrap"><div class="signal-bar '+sig.cls+'" style="width:'+bpct+'%"></div></div>';
-    html+="</div>";
+  var html=explain("Les <strong>départs parisiens</strong> sont le facteur n°1 de variation pour les restaurants résidentiels. Ce calendrier permet d'<strong>anticiper à J-7</strong> les commandes et le staffing.");
+  html+='<div class="ftw"><div class="fth"><span class="fthtit">Calendrier des départs & impacts restauration</span><span class="fthsrc">Éducation Nationale · Bison Futé · Orange Flux Vision</span></div>';
+  html+='<table class="ftable"><thead><tr><th>Début</th><th>Fin</th><th>Événement</th><th>Intensité</th><th>Action manager</th><th style="text-align:left;padding-left:20px">Contexte</th></tr></thead><tbody>';
+  departs.forEach(function(d){
+    var ic=d.int==="Rouge"?"dn":"wn";
+    html+="<tr><td style='font-size:11px;font-weight:500'>"+d.dd+"</td><td style='font-size:11px'>"+d.df+"</td><td class='td-ind'>"+d.ev+"</td><td class='td-sig'>"+badge(d.int,ic)+"</td><td style='font-size:11px;font-weight:600;color:var(--tx)'>"+d.act+"</td><td class='td-note'>"+d.comment+"</td></tr>";
   });
-  html+="</div>";
-
-  // Vue annuelle tous scores
-  html+='<div class="sec">Vue annuelle — Score tous les mois</div>';
-  html+=se("Cette vue te permet d'anticiper les bons et mauvais mois sur toute l'année. Les mois grisés n'ont pas encore assez de données pour être scorés.");
-  html+='<div class="score-all">';
-  KPI.forEach(function(r,i){
-    var s=calcScore(i);
-    var sc=scoreClass(s);
-    var pct=s||0;
-    var col=sc==="s-great"||sc==="s-good"?"#30d158":sc==="s-ok"?"#ff9f0a":sc==="s-bad"?"#ff3b30":"#e5e5ea";
-    html+='<div class="score-all-row"><div class="score-all-m">'+r.m+'</div>';
-    html+='<div class="score-all-bar-wrap"><div class="score-all-bar" style="width:'+pct+'%;background:'+col+'"></div></div>';
-    html+='<div class="score-all-num" style="color:'+col+'">'+(s!==null?s+"":"—")+"</div></div>";
-  });
-  html+="</div>";
-
-  document.getElementById("content-score").innerHTML=html;
+  html+="</tbody></table></div>";
+  document.getElementById("content-departs").innerHTML=html;
 }
 
 function setView(v){
-  ["monthly","evolution","departs","disney","insee","agenda","score"].forEach(function(id){
+  ["monthly","weekly","score","evolution","meteo","agenda","departs"].forEach(function(id){
     document.getElementById("view-"+id).classList.remove("on");
     document.getElementById("vt-"+id).classList.remove("on");
   });
   document.getElementById("view-"+v).classList.add("on");
   document.getElementById("vt-"+v).classList.add("on");
-  document.getElementById("mtabs").style.display=v==="monthly"||v==="score"?"flex":"none";
+  var showM=["monthly","weekly","score"].indexOf(v)!==-1;
+  document.getElementById("mbar-wrap").style.display=showM?"block":"none";
 }
 
 window.onload=function(){
-  document.getElementById("last-update").textContent="MàJ "+MAJ;
-  var actifs=KPI.filter(function(r){return r.st!=="À venir"&&r.st!==""});
-  document.getElementById("mois-actifs").textContent=actifs.length+" mois consolidés";
-  buildTabs();
-  renderMonthly(cur);
-  renderEvolution();
-  renderDeparts();
-  renderDisney();
-  renderInsee();
-  renderAgenda();
-  renderScore();
+  document.getElementById("maj-date").textContent=MAJ;
+  var a=KPI.filter(function(r){return r.st!=="À venir"});
+  document.getElementById("mois-actifs").textContent=a.length+" mois consolidés";
+  buildTabs();renderAll();
 };
 </script>
 
 <div class="hdr">
-  <div class="htag">Tourisme · Restauration · Paris</div>
-  <div class="htitle">Dashboard <span>2026</span></div>
-  <div class="hmeta">
-    <span class="hpill" id="last-update">—</span>
-    <span class="hpill blue" id="mois-actifs">—</span>
+  <div class="hdr-in">
+    <div class="logo">Kozy <em>·</em> Dashboard Paris 2026</div>
+    <div class="hdr-pills">
+      <span class="hpill" id="maj-date">—</span>
+      <span class="hpill hi" id="mois-actifs">—</span>
+    </div>
   </div>
 </div>
 
-<div class="vtabs">
-  <div class="vtab on" id="vt-monthly" onclick="setView('monthly')">Vue mensuelle</div>
-  <div class="vtab" id="vt-evolution" onclick="setView('evolution')">Évolution</div>
-  <div class="vtab" id="vt-departs" onclick="setView('departs')">Départs</div>
-  <div class="vtab" id="vt-disney" onclick="setView('disney')">Disneyland</div>
-  <div class="vtab" id="vt-insee" onclick="setView('insee')">INSEE</div>
-  <div class="vtab" id="vt-agenda" onclick="setView('agenda')">Agenda</div>
-  <div class="vtab" id="vt-score" onclick="setView('score')">Score & Prévision</div>
+<div class="nav">
+  <div class="nav-in">
+    <div class="ntab on" id="vt-monthly" onclick="setView('monthly')">Vue mensuelle</div>
+    <div class="ntab" id="vt-weekly" onclick="setView('weekly')">Semaine par semaine</div>
+    <div class="ntab" id="vt-score" onclick="setView('score')">Score & Prévision</div>
+    <div class="ntab" id="vt-evolution" onclick="setView('evolution')">Évolution annuelle</div>
+    <div class="ntab" id="vt-meteo" onclick="setView('meteo')">Météo & Terrasses</div>
+    <div class="ntab" id="vt-agenda" onclick="setView('agenda')">Agenda Paris</div>
+    <div class="ntab" id="vt-departs" onclick="setView('departs')">Départs & Calendrier</div>
+  </div>
 </div>
 
-<div class="mtabs" id="mtabs"></div>
+<div id="mbar-wrap">
+  <div class="mbar"><div class="mbar-in" id="mbar-in"></div></div>
+</div>
 
 <div class="main">
   <div class="view on" id="view-monthly"><div id="content-monthly"></div></div>
-  <div class="view" id="view-evolution"><div id="content-evolution"></div></div>
-  <div class="view" id="view-departs"><div id="content-departs"></div></div>
-  <div class="view" id="view-disney"><div id="content-disney"></div></div>
-  <div class="view" id="view-insee"><div id="content-insee"></div></div>
-  <div class="view" id="view-agenda"><div id="content-agenda"></div></div>
+  <div class="view" id="view-weekly"><div id="content-weekly"></div></div>
   <div class="view" id="view-score"><div id="content-score"></div></div>
-  <div class="ftr">
-    <div class="fnote">Sources · Paris je t'aime · ADP · Flux Vision Orange · ForwardKeys · Cirium · INSEE · Bison Futé · Disneyland Paris</div>
-  </div>
+  <div class="view" id="view-evolution"><div id="content-evolution"></div></div>
+  <div class="view" id="view-meteo"><div id="content-meteo"></div></div>
+  <div class="view" id="view-agenda"><div id="content-agenda"></div></div>
+  <div class="view" id="view-departs"><div id="content-departs"></div></div>
+</div>
+
+<div class="ftr">
+  <div class="ftrnote">Sources · Paris je t'aime · Groupe ADP · Orange Flux Vision · ForwardKeys · Cirium · INSEE · Bison Futé · Disneyland Paris · Météo France</div>
 </div>
 
 </body>
